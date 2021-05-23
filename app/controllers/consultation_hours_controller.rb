@@ -1,0 +1,2 @@
+class ConsultationHoursController < ApplicationController
+end

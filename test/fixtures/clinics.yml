@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  clinic_name: MyString
+  clinic_admin_number: MyString
+  director_name: MyString
+  phone_number: 
+  introduction: MyText
+  user_id: 1
+  pdf: 
+  is_pdf_ony: false
+  is_valid: false
+
+two:
+  clinic_name: MyString
+  clinic_admin_number: MyString
+  director_name: MyString
+  phone_number: 
+  introduction: MyText
+  user_id: 1
+  pdf: 
+  is_pdf_ony: false
+  is_valid: false
