@@ -24,3 +24,7 @@ departments = Department.create!([
   { department_name: "消化器内科" },
   { department_name: "眼科" }
 ])
+
+User.create(email: 'test@gmail.com', password: 'password')
+Clinic.create!(clinic_name: "田中病院",clinic_admin_number: "右51" ,director_name:"田中太郎" ,phone_number:"123-456-7890" ,introduction: "全力尽くします" ,user_id: "1" ,pdf: "1234")
+ClinicDepartment.create!(clinic_id: "1", department_id: "1")
