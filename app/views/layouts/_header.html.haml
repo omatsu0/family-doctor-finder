@@ -1,0 +1,14 @@
+%header.navbar.navbar-expand-sm.navbar-light.bg-light
+  .container
+    = link_to "FamilyDoctorFinder", root_path, class: "navbar-brand mr-auto"
+    %ul.navbar-nav
+      - if user_signed_in?
+        %li.nav-item.active
+          = link_to 'アカウント編集', edit_user_registration_path, class: 'nav-link'
+        %li.nav-item.active
+          = link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'nav-link'
+      - else
+        %li.nav-item.active
+          = link_to "新規登録(あとで削除)", new_user_registration_path, class: 'nav-link'
+        %li.nav-item.active
+          = link_to "ログイン", new_user_session_path, class: 'nav-link'
