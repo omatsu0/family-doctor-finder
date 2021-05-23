@@ -5,6 +5,7 @@ class Clinic < ApplicationRecord
   has_many :memos, dependent: :destroy
 
   validates :clinic_name, presence: true
+  validates :clinic_furigana, presence: true
   validates :is_pdf_ony, inclusion: { in: [true, false] }
   validates :is_valid, inclusion: { in: [true, false] }
 end

@@ -2,6 +2,7 @@ class CreateClinics < ActiveRecord::Migration[6.0]
   def change
     create_table :clinics do |t|
       t.string :clinic_name, null: false
+      t.string :clinic_furigana, null: false
       t.string :clinic_admin_number
       t.string :director_name
       t.string :phone_number

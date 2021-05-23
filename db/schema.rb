@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_23_170327) do
+ActiveRecord::Schema.define(version: 2021_05_23_132815) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "clinic_departments", force: :cascade do |t|
-    t.bigint "clinic_id", null: false
-    t.bigint "department_id", null: false
+    t.integer "clinic_id", null: false
+    t.integer "department_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["clinic_id", "department_id"], name: "index_clinic_departments_on_clinic_id_and_department_id"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2021_05_23_170327) do
 
   create_table "clinics", force: :cascade do |t|
     t.string "clinic_name", null: false
+    t.string "clinic_furigana", null: false
     t.string "clinic_admin_number"
     t.string "director_name"
     t.string "phone_number"
@@ -88,5 +89,5 @@ ActiveRecord::Schema.define(version: 2021_05_23_170327) do
   end
 
   add_foreign_key "clinic_departments", "clinics"
-  add_foreign_key "clinic_departments", "users", column: "department_id"
+  add_foreign_key "clinic_departments", "departments"
 end
