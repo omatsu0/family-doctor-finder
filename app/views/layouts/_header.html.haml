@@ -4,6 +4,8 @@
     %ul.navbar-nav
       - if user_signed_in?
         %li.nav-item.active
+          = link_to "病院を登録する", new_clinic_path, class: "nav-link"
+        %li.nav-item.active
           = link_to 'アカウント編集', edit_user_registration_path, class: 'nav-link'
         %li.nav-item.active
           = link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'nav-link'

@@ -1,0 +1,23 @@
+%h1.mt-2 イベント作成
+
+= form_with(model: @clinic, class: "form-horizontal") do |f|
+  #errors
+  .form-group
+    = f.label :clinic_name
+    = f.text_field :clinic_name, class: "form-control"
+  .form-group
+    = f.label :clinic_furigana
+    = f.text_field :clinic_furigana, class: "form-control"
+  .form-group
+    = f.label :clinic_admin_number
+    = f.text_field :clinic_admin_number, class: "form-control"
+  .form-group
+    = f.label :director_name
+    = f.text_field :director_name, class: "form-control"
+  .form-group
+    = f.label :phone_number
+    = f.text_field :phone_number, class: "form-control"
+  .form-group
+    = f.label :introduction
+    = f.text_area :introduction, class: "form-control", row: 10
+  = f.submit class: "btn btn-primary"
