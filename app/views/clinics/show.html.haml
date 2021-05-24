@@ -1,1 +1,49 @@
 %h1.mt-3.mb-3= @clinic.clinic_name
+.row
+  .col-8
+    .card.mb-2
+      %h5.card-header 読み仮名
+      .card-body
+        %p.card-text= @clinic.clinic_furigana
+      %h5.card-header 読み仮名
+      .card-body
+        %p.card-text= @clinic.clinic_admin_number
+      %h5.card-header 読み仮名
+      .card-body
+        %p.card-text= @clinic.director_name
+      %h5.card-header 読み仮名
+      .card-body
+        %p.card-text= @clinic.phone_number
+      %h5.card-header 読み仮名
+      .card-body
+        %p.card-text= @clinic.introduction
+      %h5.card-header 読み仮名
+      .card-body
+        %p.card-text= @clinic.user_id
+      %h5.card-header 読み仮名
+      .card-body
+        %p.card-text= @clinic.pdf
+      %h5.card-header 読み仮名
+      .card-body
+        %p.card-text= @clinic.is_pdf_ony
+      %h5.card-header 読み仮名
+      .card-body
+        %p.card-text= @clinic.is_valid
+      %h5.card-header 読み仮名
+      .card-body
+        %p.card-text= @clinic.created_at
+      %h5.card-header 読み仮名
+      .card-body
+        %p.card-text= @clinic.updated_at
+      %h5.card-header 読み仮名
+      .card-body
+        %p.card-text= @clinic.location.address
+      %h5.card-header 読み仮名
+      .card-body
+        %p.card-text= @clinic.location.post_address
+      %h5.card-header 読み仮名
+      .card-body
+        %p.card-text= @clinic.departments.pluck(:department_name)
+
+
+

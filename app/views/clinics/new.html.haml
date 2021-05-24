@@ -1,6 +1,6 @@
 %h1.mt-2 イベント作成
 
-= form_with(model: @clinic, class: "form-horizontal") do |f|
+= form_for @clinic, url: clinics_path ,html: { class: "form-horizontal" } do |f|
   #errors
   .form-group
     = f.label :clinic_name
@@ -20,4 +20,16 @@
   .form-group
     = f.label :introduction
     = f.text_area :introduction, class: "form-control", row: 10
+  = f.fields_for :clinic_departments do |ff|
+    .form-group
+      = ff.label :department_id
+      = ff.collection_select :department_id, @departments, :id, :department_name
+  = f.fields_for :location do |fin|
+    .form-group
+      = fin.label :address
+      = fin.text_field :address
+    .form-group
+      = fin.label :post_address
+      = fin.text_field :post_address
+
   = f.submit class: "btn btn-primary"
