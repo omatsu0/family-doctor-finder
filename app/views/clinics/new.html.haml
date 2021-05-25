@@ -31,5 +31,8 @@
     .form-group
       = fin.label :post_address
       = fin.text_field :post_address
+    .form-group
+      = fin.label :area_id
+      = fin.collection_select :area_id, @areas, :id, :name
 
   = f.submit class: "btn btn-primary"

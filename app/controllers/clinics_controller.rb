@@ -5,9 +5,9 @@ class ClinicsController < ApplicationController
     @clinic = Clinic.new
     @clinic.build_location
     @clinic.clinic_departments.build
-    @clinic.build_consultation_hours
 
     @departments = Department.all
+    @areas = Area.all
   end
 
   def create
@@ -36,7 +36,7 @@ class ClinicsController < ApplicationController
   def clinic_params
     params.require(:clinic).permit(
       :clinic_name, :clinic_furigana, :clinic_admin_number, :director_name,
-      :phone_number, :introduction, :pdf, :is_pdf_ony, :is_valid, location_attributes: [:id, :address, :post_address],
+      :phone_number, :introduction, :pdf, :is_pdf_ony, :is_valid, location_attributes: [:id, :address, :post_address,:area_id],
       clinic_departments_attributes: [:id, :department_id]
     )
   end

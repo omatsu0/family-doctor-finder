@@ -28,3 +28,17 @@ departments = Department.create!([
 User.create(email: 'test@gmail.com', password: 'password')
 Clinic.create!(clinic_name: "田中病院" ,clinic_furigana: "たなかびょういん" ,clinic_admin_number: "右51" ,director_name:"田中太郎" ,phone_number:"123-456-7890" ,introduction: "全力尽くします" ,user_id: "1" ,pdf: "1234")
 ClinicDepartment.create!(clinic_id: "1", department_id: "1")
+
+areas = Area.create!([
+  { name: "北区" },
+  { name: "東山区" },
+  { name: "西京区" },
+  { name: "南区" },
+  { name: "上京区" },
+  { name: "中京区" },
+  { name: "左京区" },
+  { name: "右京区" },
+  { name: "下京区" },
+  { name: "伏見区" },
+  { name: "山科区" }
+])

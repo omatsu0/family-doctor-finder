@@ -5,43 +5,46 @@
       %h5.card-header 読み仮名
       .card-body
         %p.card-text= @clinic.clinic_furigana
-      %h5.card-header 読み仮名
+      %h5.card-header 管理番号
       .card-body
         %p.card-text= @clinic.clinic_admin_number
-      %h5.card-header 読み仮名
+      %h5.card-header 医院長名
       .card-body
         %p.card-text= @clinic.director_name
-      %h5.card-header 読み仮名
+      %h5.card-header 電話番号
       .card-body
         %p.card-text= @clinic.phone_number
-      %h5.card-header 読み仮名
+      %h5.card-header 紹介文
       .card-body
         %p.card-text= @clinic.introduction
-      %h5.card-header 読み仮名
+      %h5.card-header 登録ユーザ
       .card-body
         %p.card-text= @clinic.user_id
-      %h5.card-header 読み仮名
+      %h5.card-header pdfURL
       .card-body
         %p.card-text= @clinic.pdf
-      %h5.card-header 読み仮名
+      %h5.card-header PDFのみフラグ
       .card-body
         %p.card-text= @clinic.is_pdf_ony
-      %h5.card-header 読み仮名
+      %h5.card-header 表示フラグ
       .card-body
         %p.card-text= @clinic.is_valid
-      %h5.card-header 読み仮名
+      %h5.card-header 作成日
       .card-body
         %p.card-text= @clinic.created_at
-      %h5.card-header 読み仮名
+      %h5.card-header 更新日
       .card-body
         %p.card-text= @clinic.updated_at
-      %h5.card-header 読み仮名
+      %h5.card-header 住所
       .card-body
         %p.card-text= @clinic.location.address
-      %h5.card-header 読み仮名
+      %h5.card-header 地区
+      .card-body
+        %p.card-text= @clinic.location.area.name
+      %h5.card-header 郵便番号
       .card-body
         %p.card-text= @clinic.location.post_address
-      %h5.card-header 読み仮名
+      %h5.card-header 診療科
       .card-body
         %p.card-text= @clinic.departments.pluck(:department_name)
 
