@@ -1,0 +1,9 @@
+%h5= @department.department_name
+
+-# %ul.list-group
+-#   - @clinics.each do |clinic|
+-#     = link_to(clinic, class: "list-group-item list-group-item-action") do
+-#       %h5.list-group-item-heading= clinic.clinic_name
+
+- @department.clinic_departments.each do |clinic_departments|
+  = clinic_departments.clinic.clinic_name

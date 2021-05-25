@@ -8,6 +8,7 @@ class Clinic < ApplicationRecord
 
   accepts_nested_attributes_for :location
   accepts_nested_attributes_for :clinic_departments
+  accepts_nested_attributes_for :consultation_hours
 
   validates :clinic_name, presence: true
   validates :clinic_furigana, presence: true

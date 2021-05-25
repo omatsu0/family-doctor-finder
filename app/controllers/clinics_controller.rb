@@ -5,6 +5,7 @@ class ClinicsController < ApplicationController
     @clinic = Clinic.new
     @clinic.build_location
     @clinic.clinic_departments.build
+    @clinic.build_consultation_hours
 
     @departments = Department.all
   end

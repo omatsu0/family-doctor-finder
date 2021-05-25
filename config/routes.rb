@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
-  resources :memos
+  root 'home#index'
+  
+  resources :clinics do
+    resources :memos
+  end
+  resources :departments
   resources :locations
   resources :consultation_hours
-  resources :clinics
-  resources :departments
   devise_for :users
-  root 'home#index'
 end
