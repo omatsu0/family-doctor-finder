@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_23_132815) do
+ActiveRecord::Schema.define(version: 2021_05_25_104846) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "areas", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "clinic_departments", force: :cascade do |t|
     t.integer "clinic_id", null: false
@@ -63,6 +69,7 @@ ActiveRecord::Schema.define(version: 2021_05_23_132815) do
     t.integer "clinic_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "area_id"
     t.index ["clinic_id"], name: "index_locations_on_clinic_id"
   end
 

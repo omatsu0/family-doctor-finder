@@ -5,5 +5,8 @@
 -#     = link_to(clinic, class: "list-group-item list-group-item-action") do
 -#       %h5.list-group-item-heading= clinic.clinic_name
 
-- @department.clinic_departments.each do |clinic_departments|
-  = clinic_departments.clinic.clinic_name
+- @department.clinic_departments.each do |clinic_department|
+  = link_to(clinic_department.clinic, class: "list-group-item list-group-item-action") do
+    = clinic_department.clinic.clinic_name
+  
+  = debug clinic_department.clinic.id
