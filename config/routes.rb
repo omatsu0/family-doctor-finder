@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'home#index'
   
   resources :clinics do
-    resources :memos
+    resources :announcements
   end
 
   resources :area, only: [:index, :show]

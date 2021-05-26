@@ -4,7 +4,7 @@ class Clinic < ApplicationRecord
   has_many :consultation_hours, dependent: :destroy
   has_many :clinic_departments, dependent: :destroy
   has_many :departments, through: :clinic_departments
-  has_many :memos, dependent: :destroy
+  has_many :announcements, dependent: :destroy
 
   accepts_nested_attributes_for :location
   accepts_nested_attributes_for :clinic_departments

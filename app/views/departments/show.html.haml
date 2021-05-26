@@ -1,7 +1,7 @@
 %h5= @department.department_name
 
-- @department.clinic_departments.each do |clinic_department|
-  = link_to(clinic_department.clinic, class: "list-group-item list-group-item-action") do
-    = clinic_department.clinic.clinic_name
+- @department.clinic_departments.each do |department_clinic|
+  = link_to(department_clinic.clinic, class: "list-group-item list-group-item-action") do
+    = department_clinic.clinic.clinic_name
   
-  = debug clinic_department.clinic.id
+  = debug department_clinic.clinic.id
