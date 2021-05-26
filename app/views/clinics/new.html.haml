@@ -34,5 +34,8 @@
     .form-group
       = fin.label :area_id
       = fin.collection_select :area_id, @areas, :id, :name
+      .form-group
+      = f.check_box :is_valid, checked: true
+      = f.label :is_valid, "公開する"
 
   = f.submit class: "btn btn-primary"

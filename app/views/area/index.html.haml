@@ -1,0 +1,5 @@
+%h1.mb-5 エリア別リンク
+
+%ul
+  - @areas.each do |area|
+    = link_to area.name, area, class: "btn btn-info btn-sm mb-3"

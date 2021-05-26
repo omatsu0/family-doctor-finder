@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :clinics do
     resources :memos
   end
+
+  resources :area, only: [:index, :show]
   resources :departments
   resources :locations
   resources :consultation_hours

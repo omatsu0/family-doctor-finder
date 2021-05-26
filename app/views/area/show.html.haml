@@ -1,0 +1,9 @@
+%h5= @area.name
+
+- @locations.each do |area_clinic|
+  = link_to(area_clinic.clinic, class: "list-group-item list-group-item-action") do
+    = area_clinic.clinic.clinic_name
+
+-# = debug @locations.clinic
+%h5 ああああ
+= debug @area.locations
