@@ -42,3 +42,14 @@ areas = Area.create!([
   { name: "伏見区" },
   { name: "山科区" }
 ])
+
+dayofweeks = DayOfWeek.create!([
+  { day_of_week: "月" },
+  { day_of_week: "火" },
+  { day_of_week: "水" },
+  { day_of_week: "木" },
+  { day_of_week: "金" },
+  { day_of_week: "土" },
+  { day_of_week: "日" },
+  { day_of_week: "祝" }
+])
