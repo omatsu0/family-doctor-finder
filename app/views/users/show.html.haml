@@ -1,0 +1,10 @@
+%h1 マイページ
+
+%p ユーザID
+= @user.id
+
+%ul.list-group
+  - @user_clinics.each do |clinic|
+    = link_to(clinic, class: "list-group-item list-group-item-action") do
+      %h5.list-group-item-heading= clinic.clinic_name
+

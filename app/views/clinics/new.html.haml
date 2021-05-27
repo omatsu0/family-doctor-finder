@@ -24,10 +24,10 @@
     .form-group
       = ff.label :department_id
       = ff.collection_select :department_id, @departments, :id, :department_name
-  = f.fields_for :consultation_hours do |fn|
-    .form-group
-      = fn.label :day_of_week_id
-      = fn.collection_check_boxes :day_of_week_id, @dayofweeks, :id, :day_of_week
+  -# = f.fields_for :consultation_hours do |fn|
+  -#   .form-group
+  -#     = fn.label :day_of_week_id
+  -#     = fn.collection_check_boxes :day_of_week_id, @dayofweeks, :id, :day_of_week
   = f.fields_for :location do |fin|
     .form-group
       = fin.label :address

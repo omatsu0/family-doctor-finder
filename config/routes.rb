@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   resources :locations
   resources :consultation_hours
   devise_for :users
+  resources :users, only: [:show]
 end
