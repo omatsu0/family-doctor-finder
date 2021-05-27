@@ -28,6 +28,7 @@ class ClinicsController < ApplicationController
   end
 
   def update
+    @clinic.user_id = current_user.id
     redirect_to @clinic, notice: '更新しました' if @clinic.update!(clinic_params)
   end
 

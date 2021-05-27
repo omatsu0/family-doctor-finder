@@ -1,4 +1,8 @@
-%h1.mt-3.mb-3= @clinic.clinic_name
+
+%h1.mt-3.mb-3.mr-auto= @clinic.clinic_name
+- if user_signed_in?
+  = link_to "編集", edit_clinic_path, class: "btn btn-info btn-sm mb-3"
+    
 .row
   .col-8
     .card.mb-2
