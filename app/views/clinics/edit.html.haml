@@ -1,6 +1,6 @@
-%h1.mt-2 病院登録
+%h1.mt-2 病院情報編集
 
-= form_for @clinic, url: clinics_path ,html: { class: "form-horizontal" } do |f|
+= form_for @clinic, html: { class: "form-horizontal" } do |f|
   #errors
   .form-group
     = f.label :clinic_name

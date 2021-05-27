@@ -53,3 +53,5 @@ dayofweeks = DayOfWeek.create!([
   { day_of_week: "日" },
   { day_of_week: "祝" }
 ])
+
+ConsultationHour.create!(start_at: "2012-10-08 15:28:12", end_at: "2012-10-08 17:28:12", clinic_id: "1", day_of_week_id: "1")

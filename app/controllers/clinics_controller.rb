@@ -5,9 +5,11 @@ class ClinicsController < ApplicationController
     @clinic = Clinic.new
     @clinic.build_location
     @clinic.clinic_departments.build
+    @clinic.consultation_hours.build
 
     @departments = Department.all
     @areas = Area.all
+    @dayofweeks = DayOfWeek.all
   end
 
   def create
@@ -18,10 +20,15 @@ class ClinicsController < ApplicationController
   end
 
   def edit
+    @clinic = Clinic.find(params[:id])
+
+    @departments = Department.all
+    @areas = Area.all
+    @dayofweeks = DayOfWeek.all
   end
 
   def update
-
+    redirect_to @clinic, notice: '更新しました' if @clinic.update!(clinic_params)
   end
 
   def destroy
@@ -37,7 +44,7 @@ class ClinicsController < ApplicationController
     params.require(:clinic).permit(
       :clinic_name, :clinic_furigana, :clinic_admin_number, :director_name,
       :phone_number, :introduction, :pdf, :is_pdf_ony, :is_valid, location_attributes: [:id, :address, :post_address,:area_id],
-      clinic_departments_attributes: [:id, :department_id]
+      clinic_departments_attributes: [:id, :department_id], consultation_hours_attributes: [:id, :start_at, :end_at, {:day_of_week_id => []}]
     )
   end
 end
