@@ -1,5 +1,10 @@
 class ClinicsController < ApplicationController
   before_action :find_clinic, only: [:show, :edit, :update, :destroy]
+  before_action :set_q, only: [:index, :search]
+
+  def index
+    @clinics = Clinic.where(is_valid:true).order(:clinic_furigana)
+  end
 
   def new
     @clinic = Clinic.new
@@ -35,10 +40,18 @@ class ClinicsController < ApplicationController
   def destroy
   end
 
+  def search
+    @results = @q.result
+  end
+
   private
 
   def find_clinic
     @clinic = Clinic.find(params[:id])
+  end
+
+  def set_q
+    @q = Clinic.ransack(params[:q])
   end
 
   def clinic_params

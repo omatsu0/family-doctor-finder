@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
-  root 'home#index'
+  root 'clinics#index'
   
   resources :clinics do
     resources :announcements
+    collection do
+      get 'search'
+    end
   end
 
   resources :area, only: [:index, :show]
