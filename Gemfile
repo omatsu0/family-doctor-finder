@@ -38,6 +38,8 @@ gem 'devise-i18n-views'
 gem 'ransack'
 gem 'carrierwave', '~> 2.0'
 gem 'rmagick'
+gem 'rails_admin', '~> 2.0.0.beta'
+gem 'cancancan'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
