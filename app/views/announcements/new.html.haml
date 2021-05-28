@@ -1,0 +1,15 @@
+%h1.mt-2 お知らせ記載フォーム
+
+= form_for [@clinic, @announce], html: { class: "form-horizontal" } do |f|
+  #errors
+  .form-group
+    = f.label :body
+    = f.text_area :body, class: "form-control"
+  .form-group
+    = f.label :priority
+    = f.select :priority, [['普通',1], ['重要', 2]]
+  .form-group
+    = f.check_box :is_valid, checked: true
+    = f.label :is_valid, "表示する"
+  
+  = f.submit class: "btn btn-primary"

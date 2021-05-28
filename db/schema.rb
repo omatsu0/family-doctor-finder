@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_26_192530) do
+ActiveRecord::Schema.define(version: 2021_05_27_173049) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 2021_05_26_192530) do
     t.integer "clinic_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "is_valid", default: true
+    t.integer "priority"
   end
 
   create_table "areas", force: :cascade do |t|
@@ -45,7 +47,7 @@ ActiveRecord::Schema.define(version: 2021_05_26_192530) do
     t.string "phone_number"
     t.text "introduction"
     t.integer "user_id", null: false
-    t.bigint "pdf"
+    t.string "pdf"
     t.boolean "is_pdf_ony", default: false
     t.boolean "is_valid", default: true
     t.datetime "created_at", precision: 6, null: false

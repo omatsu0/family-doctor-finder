@@ -20,6 +20,9 @@
   .form-group
     = f.label :introduction
     = f.text_area :introduction, class: "form-control", row: 10
+  .form-group
+    = f.label :pdf
+    = f.file_field :pdf
   = f.fields_for :clinic_departments do |ff|
     .form-group
       = ff.label :department_id

@@ -37,6 +37,11 @@ class ClinicsController < ApplicationController
     redirect_to @clinic, notice: '更新しました' if @clinic.update!(clinic_params)
   end
 
+  def show
+    clinic_id=@clinic.id
+    @announcements = Announcement.where(clinic_id:clinic_id,is_valid:true)
+  end
+
   def destroy
   end
 

@@ -2,6 +2,20 @@
 %h1.mt-3.mb-3.mr-auto= @clinic.clinic_name
 - if user_signed_in?
   = link_to "編集", edit_clinic_path, class: "btn btn-info btn-sm mb-3"
+  = link_to "お知らせを書く", new_clinic_announcement_path(@clinic.id), class: "btn btn-info btn-sm mb-3"
+
+%ul.list-group
+  - @announcements.each do |announce|
+    - if announce.priority == 2
+      %h5.list-group-item-heading.text-danger.mb-0.pb-0= announce.body
+    - else
+      %h5.list-group-item-heading.mb-0.pb-0= announce.body
+
+    .list-group-item-heading.mt-0.pt-0=  '-' + announce.user.username
+    - if user_signed_in? && current_user.id==announce.user_id
+      = link_to "お知らせを編集", edit_clinic_announcement_path(@clinic.id,announce.id)
+
+= image_tag(@clinic.pdf_url, width: 100) if @clinic.pdf?
     
 .row
   .col-8
