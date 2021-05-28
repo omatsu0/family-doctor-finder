@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   root 'clinics#index'
   
   resources :clinics do
+    get 'download',to: "clinics#download",as: "download"
     resources :announcements
     collection do
       get 'search'

@@ -49,6 +49,15 @@ class ClinicsController < ApplicationController
     @results = @q.result
   end
 
+  def download
+    @clinic = Clinic.find(params[:clinic_id])
+    # ref: https://github.com/carrierwaveuploader/carrierwave#activerecord
+    filepath = @clinic.pdf.current_path
+    stat = File::stat(filepath)
+    send_file(filepath, :filename => @clinic.pdf_identifier, :length => stat.size)
+
+  end
+
   private
 
   def find_clinic
