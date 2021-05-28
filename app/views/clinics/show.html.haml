@@ -15,8 +15,9 @@
     - if user_signed_in? && current_user.id==announce.user_id
       = link_to "お知らせを編集", edit_clinic_announcement_path(@clinic.id,announce.id)
 
-= image_tag(@clinic.pdf_url, width: 100) if @clinic.pdf?
-    
+-# = image_tag(@clinic.pdf_url, width: 100) if @clinic.pdf?
+= image_tag @clinic.pdf_url(:thumb) if @clinic.pdf?
+
 .row
   .col-8
     .card.mb-2

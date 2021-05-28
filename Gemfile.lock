@@ -207,6 +207,7 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    rmagick (4.2.2)
     rubocop (0.76.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
@@ -312,6 +313,7 @@ DEPENDENCIES
   rails (~> 6.0.3, >= 6.0.3.7)
   rails-i18n (~> 6.0.0)
   ransack
+  rmagick
   rubocop-airbnb
   sass-rails (>= 6)
   selenium-webdriver
