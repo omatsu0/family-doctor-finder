@@ -1,13 +1,14 @@
-class Clinic < ApplicationRecord
-  belongs_to :user, optional: true
+class Clinic < ActiveRecord::Base
+  belongs_to :user
   has_one :location, dependent: :destroy
   has_many :consultation_hours, dependent: :destroy
+  has_many :day_of_weeks, through: :consultation_hours
   has_many :clinic_departments, dependent: :destroy
   has_many :departments, through: :clinic_departments
 
+  accepts_nested_attributes_for :clinic_departments, allow_destroy: true
+  accepts_nested_attributes_for :consultation_hours, allow_destroy: true
   accepts_nested_attributes_for :location
-  accepts_nested_attributes_for :clinic_departments
-  accepts_nested_attributes_for :consultation_hours
 
   validates :clinic_name, presence: true
   validates :clinic_furigana, presence: true

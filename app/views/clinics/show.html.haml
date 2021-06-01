@@ -56,18 +56,21 @@
       %h5.card-header 更新日
       .card-body
         %p.card-text= @clinic.updated_at
-      %h5.card-header 住所
-      .card-body
-        %p.card-text= @clinic.location.address
-      %h5.card-header 地区
-      .card-body
-        %p.card-text= @clinic.location.area.name
-      %h5.card-header 郵便番号
-      .card-body
-        %p.card-text= @clinic.location.post_address
+      -# %h5.card-header 住所
+      -# .card-body
+      -#   %p.card-text= @clinic.location.address
+      -# %h5.card-header 地区
+      -# .card-body
+      -#   %p.card-text= @clinic.location.area.name
+      -# %h5.card-header 郵便番号
+      -# .card-body
+      -#   %p.card-text= @clinic.location.post_address
       %h5.card-header 診療科
       .card-body
         %p.card-text= @clinic.departments.pluck(:department_name)
+      %h5.card-header 診療曜日
+      .card-body
+        %p.card-text= @clinic.day_of_weeks.pluck(:dayofweek_name)
 
 
 

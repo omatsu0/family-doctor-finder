@@ -1,6 +1,6 @@
 %h1.mt-2 病院登録
 
-= form_for @clinic, url: clinics_path ,html: { class: "form-horizontal" } do |f|
+= form_for @clinic, url: clinics_path, html: { class: "form-horizontal" } do |f|
   #errors
   .form-group
     = f.label :clinic_name
@@ -23,26 +23,19 @@
   .form-group
     = f.label :pdf
     = f.file_field :pdf
-  = f.fields_for :clinic_departments do |ff|
-    .form-group
-      = ff.label :department_id
-      = ff.collection_select :department_id, @departments, :id, :department_name
-  -# = f.fields_for :consultation_hours do |fn|
+  -# = f.fields_for :clinic_departments do |ff|
   -#   .form-group
-  -#     = fn.label :day_of_week_id
-  -#     = fn.collection_check_boxes :day_of_week_id, @dayofweeks, :id, :day_of_week
-  = f.fields_for :location do |fin|
+  -#     = ff.label :department_id
+  -#     = ff.collection_select :department_id, ff.object.selectable_departments , :id, :department_name,include_hidden: false
+  = f.fields_for :consultation_hours do |fn|
     .form-group
-      = fin.label :address
-      = fin.text_field :address
+      = fn.label :start_at, "開始時間"
+      = fn.time_select :start_at
     .form-group
-      = fin.label :post_address
-      = fin.text_field :post_address
+      = fn.label :end_at, "終了時間"
+      = fn.time_select :end_at
     .form-group
-      = fin.label :area_id
-      = fin.collection_select :area_id, @areas, :id, :name
-    .form-group
-      = f.check_box :is_valid, checked: true
-      = f.label :is_valid, "公開する"
+      = fn.label :day_of_week
+      = fn.collection_select :day_of_week_id,fn.object.selectable_dayofweeks, :id, :dayofweek_name,include_hidden: false
 
   = f.submit class: "btn btn-primary"

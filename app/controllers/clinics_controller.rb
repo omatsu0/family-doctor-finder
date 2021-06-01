@@ -7,29 +7,24 @@ class ClinicsController < ApplicationController
   end
 
   def new
-    @clinic = Clinic.new
-    @clinic.build_location
-    @clinic.clinic_departments.build
-    @clinic.consultation_hours.build
-
-    @departments = Department.all
-    @areas = Area.all
-    @dayofweeks = DayOfWeek.all
+    @clinic = Form::Clinic.new
   end
 
   def create
-    @clinic = Clinic.new(clinic_params)
+    @clinic = Form::Clinic.new(clinic_params)
     @clinic.user_id = current_user.id
 
-    redirect_to @clinic, notice: '作成しました' if @clinic.save
+    if @clinic.save!
+      redirect_to clinics_path, notice: "病院を登録しました"
+    else
+      render :new, notice: "登録に失敗しました"
+    end
   end
 
   def edit
     @clinic = Clinic.find(params[:id])
 
     @departments = Department.all
-    @areas = Area.all
-    @dayofweeks = DayOfWeek.all
   end
 
   def update
@@ -69,10 +64,12 @@ class ClinicsController < ApplicationController
   end
 
   def clinic_params
-    params.require(:clinic).permit(
-      :clinic_name, :clinic_furigana, :clinic_admin_number, :director_name,
-      :phone_number, :introduction, :pdf, :is_pdf_ony, :is_valid, location_attributes: [:id, :address, :post_address,:area_id],
-      clinic_departments_attributes: [:id, :department_id], consultation_hours_attributes: [:id, :start_at, :end_at, {:day_of_week_id => []}]
-    )
-  end
+    params
+      .require(:form_clinic)
+      .reverse_merge(day_of_week_ids: [])
+      .permit(
+        Form::Clinic::REGISTRABLE_ATTRIBUTES + Form::Clinic::REGISTRABLE_RELATIONS +
+        [consultation_hours_attributes: Form::ConsultationHour::REGISTRABLE_ATTRIBUTES])
+    end
+
 end
