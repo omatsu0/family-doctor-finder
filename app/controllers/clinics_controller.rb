@@ -66,9 +66,8 @@ class ClinicsController < ApplicationController
   def clinic_params
     params
       .require(:form_clinic)
-      .reverse_merge(day_of_week_ids: [])
       .permit(
-        Form::Clinic::REGISTRABLE_ATTRIBUTES + Form::Clinic::REGISTRABLE_RELATIONS +
+        Form::Clinic::REGISTRABLE_ATTRIBUTES +
         [consultation_hours_attributes: Form::ConsultationHour::REGISTRABLE_ATTRIBUTES])
     end
 
