@@ -1,0 +1,12 @@
+.nested-fields
+  .form-group
+    = f.label :day_of_week_id, "曜日"
+    = f.collection_select :day_of_week_id, @dayofweeks,:id,:dayofweek_name,include_hidden: false
+  .form-group
+    = f.label :start_at, "開始時間"
+    = f.time_select :start_at
+  .form-group
+    = f.label :end_at, "終了時間"
+    = f.time_select :end_at
+    
+    = link_to_remove_association '削除', f

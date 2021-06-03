@@ -1,6 +1,6 @@
 %h1.mt-2 病院登録
 
-= form_for @clinic, url: clinics_path, html: { class: "form-horizontal" } do |f|
+= form_with(model: @clinic, method: :post, local: true, html: { class: "form-horizontal" }) do |f|
   #errors
   .form-group
     = f.label :clinic_name
@@ -11,6 +11,16 @@
   .form-group
     = f.label :clinic_admin_number
     = f.text_field :clinic_admin_number, class: "form-control"
+  = f.fields_for :location do |fin|
+    .form-group
+      = fin.label :address
+      = fin.text_field :address
+    .form-group
+      = fin.label :post_address
+      = fin.text_field :post_address
+    .form-group
+      = fin.label :area_id
+      = fin.collection_select :area_id, @areas, :id, :name,include_hidden: false
   .form-group
     = f.label :director_name
     = f.text_field :director_name, class: "form-control"
@@ -23,19 +33,16 @@
   .form-group
     = f.label :pdf
     = f.file_field :pdf
-  -# = f.fields_for :clinic_departments do |ff|
-  -#   .form-group
-  -#     = ff.label :department_id
-  -#     = ff.collection_select :department_id, ff.object.selectable_departments , :id, :department_name,include_hidden: false
-  = f.fields_for :consultation_hours do |fn|
-    .form-group
-      = fn.label :start_at, "開始時間"
-      = fn.time_select :start_at
-    .form-group
-      = fn.label :end_at, "終了時間"
-      = fn.time_select :end_at
-    .form-group
-      = fn.label :day_of_week
-      = fn.collection_select :day_of_week_id,fn.object.selectable_dayofweeks, :id, :dayofweek_name,include_hidden: false
+  = f.fields_for :consultation_hours do |ch|
+    = render 'consultation_hour_fields', f: ch
+  .links
+    = link_to_add_association '＋別の診療時間を追加', f, :consultation_hours
+  = f.fields_for :clinic_departments do |cd|
+    = render 'clinic_department_fields', f: cd
+  .links
+    = link_to_add_association '＋別の診療科目を追加', f, :clinic_departments
+  .form-group
+    = f.check_box :is_valid, checked: true
+    = f.label :is_valid, "公開する"
 
   = f.submit class: "btn btn-primary"

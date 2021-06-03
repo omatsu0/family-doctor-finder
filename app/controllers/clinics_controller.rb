@@ -7,12 +7,19 @@ class ClinicsController < ApplicationController
   end
 
   def new
-    @clinic = Form::Clinic.new
+    @clinic = Clinic.new
+    @clinic.consultation_hours.build
+    @clinic.clinic_departments.build
+    @clinic.build_location
+
+    @dayofweeks=DayOfWeek.all
+    @departments = Department.all
+    @areas = Area.all
   end
 
   def create
-    @clinic = Form::Clinic.new(clinic_params)
-    @clinic.user_id = current_user.id
+    @clinic = Clinic.new(clinic_params)
+    # @clinic.user_id = current_user.id
 
     if @clinic.save!
       redirect_to clinics_path, notice: "病院を登録しました"
@@ -65,10 +72,12 @@ class ClinicsController < ApplicationController
 
   def clinic_params
     params
-      .require(:form_clinic)
-      .permit(
-        Form::Clinic::REGISTRABLE_ATTRIBUTES +
-        [consultation_hours_attributes: Form::ConsultationHour::REGISTRABLE_ATTRIBUTES])
-    end
+      .require(:clinic).permit(
+        :clinic_name, :clinic_furigana, :clinic_admin_number, :director_name,
+        :phone_number, :introduction, :pdf, :is_pdf_ony, :is_valid,
+        clinic_departments_attributes: [:id, :department_id],
+        location_attributes: [:id, :address, :post_address,:area_id],
+        consultation_hours_attributes: [:id, :start_at, :end_at,:_destroy, :day_of_week_id ]).merge(user_id: current_user.id)
+  end
 
 end
