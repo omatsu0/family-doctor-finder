@@ -75,9 +75,9 @@ class ClinicsController < ApplicationController
       .require(:clinic).permit(
         :clinic_name, :clinic_furigana, :clinic_admin_number, :director_name,
         :phone_number, :introduction, :pdf, :is_pdf_ony, :is_valid,
-        clinic_departments_attributes: [:id, :department_id],
+        clinic_departments_attributes: [:id, :department_id,:_destroy,],
         location_attributes: [:id, :address, :post_address,:area_id],
-        consultation_hours_attributes: [:id, :start_at, :end_at,:_destroy, :day_of_week_id ]).merge(user_id: current_user.id)
+        consultation_hours_attributes: [:id, :start_at, :end_at, :day_of_week_id,:_destroy ]).merge(user_id: current_user.id)
   end
 
 end
