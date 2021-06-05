@@ -1,4 +1,7 @@
 class Clinic < ActiveRecord::Base
+  mount_uploader :pdf, ImageUploader
+  skip_callback :commit, :after, :remove_previously_stored_pdf
+
   belongs_to :user
   has_one :location, dependent: :destroy
   has_many :consultation_hours,inverse_of: :clinic
@@ -14,6 +17,4 @@ class Clinic < ActiveRecord::Base
   validates :clinic_furigana, presence: true
   validates :is_pdf_ony, inclusion: { in: [true, false] }
   validates :is_valid, inclusion: { in: [true, false] }
-
-  mount_uploader :pdf, ImageUploader
 end

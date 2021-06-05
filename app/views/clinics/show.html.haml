@@ -1,3 +1,4 @@
+= render 'layouts/flash_messages'
 
 %h1.mt-3.mb-3.mr-auto= @clinic.clinic_name
 - if user_signed_in?
@@ -56,21 +57,59 @@
       %h5.card-header 更新日
       .card-body
         %p.card-text= @clinic.updated_at
-      -# %h5.card-header 住所
-      -# .card-body
-      -#   %p.card-text= @clinic.location.address
-      -# %h5.card-header 地区
-      -# .card-body
-      -#   %p.card-text= @clinic.location.area.name
-      -# %h5.card-header 郵便番号
-      -# .card-body
-      -#   %p.card-text= @clinic.location.post_address
+      %h5.card-header 住所
+      .card-body
+        %p.card-text= @clinic.location.address
+      %h5.card-header 地区
+      .card-body
+        %p.card-text= @clinic.location.area.name
+      %h5.card-header 郵便番号
+      .card-body
+        %p.card-text= @clinic.location.post_address
       %h5.card-header 診療科
       .card-body
         %p.card-text= @clinic.departments.pluck(:department_name)
-      %h5.card-header 診療曜日
+      %h5.card-header 診療曜日、時間
       .card-body
-        %p.card-text= @clinic.day_of_weeks.pluck(:dayofweek_name)
+      -#   %p.card-text= @clinic.day_of_weeks.pluck(:dayofweek_name)
+      -# %h5.card-header 診療開始時間
+      -# .card-body
+      -#   %p.card-text= @clinic.consultation_hours.pluck(:start_at)
+      - @clinic.consultation_hours.each do |hour|
+        %p= hour.day_of_week.dayofweek_name
+        %p= "#{hour.start_at.strftime('%H:%M')} ~ #{hour.end_at.strftime('%H:%M')}"
 
+%h2 所在地
 
-
+:css
+  #map { height: 300px;}
+%script{async: "", defer: "defer", src: "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_API_KEY']}=initMap"}
+%script{src: "//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"}
+%script{src: "//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js", type: "text/javascript"}
+#map
+:javascript
+  function initMap() {
+    var latlng = new google.maps.LatLng(
+      #{@clinic.location.latitude},
+      #{@clinic.location.longitude}
+      );
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 15,
+      center: latlng
+    });
+    var marker = new google.maps.Marker({
+      position: latlng,
+      map: map
+    });
+    var infowindow = new google.maps.InfoWindow({
+      content: '<a href="https://www.google.com/maps/search/?api=1&query=#{@clinic.location.latitude},#{@clinic.location.longitude}" target="_blank" rel="noopener noreferrer">google mapで開く</a>',
+    });
+    infowindow.open(map, marker);
+    google.maps.event.addListener(infowindow, "closeclick", function() {
+      google.maps.event.addListenerOnce(marker, "click", function(event) {
+        infowindow.open(map, marker);
+      });
+    });
+  }
+  initMap();
+%script{async: "", defer: "defer", src: "https://maps.googleapis.com/maps/api/js?key=#{ ENV['GOOGLE_API_KEY'] }&callback=initMap"}

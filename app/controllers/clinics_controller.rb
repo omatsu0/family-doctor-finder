@@ -31,17 +31,24 @@ class ClinicsController < ApplicationController
   def edit
     @clinic = Clinic.find(params[:id])
 
+    @dayofweeks=DayOfWeek.all
     @departments = Department.all
+    @areas = Area.all
   end
 
   def update
     @clinic.user_id = current_user.id
-    redirect_to @clinic, notice: '更新しました' if @clinic.update!(clinic_params)
+    if @clinic.update!(clinic_params)
+      redirect_to @clinic, notice: '更新しました'
+    else
+      render :show
+    end
   end
 
   def show
     clinic_id=@clinic.id
     @announcements = Announcement.where(clinic_id:clinic_id,is_valid:true)
+    @consul_hours = ConsultationHour.where(clinic_id: clinic_id).pluck(:day_of_week_id,:start_at)
   end
 
   def destroy
@@ -74,7 +81,7 @@ class ClinicsController < ApplicationController
     params
       .require(:clinic).permit(
         :clinic_name, :clinic_furigana, :clinic_admin_number, :director_name,
-        :phone_number, :introduction, :pdf, :is_pdf_ony, :is_valid,
+        :phone_number, :introduction, :pdf, :pdf_cache, :remove_pdf, :is_pdf_ony, :is_valid,
         clinic_departments_attributes: [:id, :department_id,:_destroy,],
         location_attributes: [:id, :address, :post_address,:area_id],
         consultation_hours_attributes: [:id, :start_at, :end_at, :day_of_week_id,:_destroy ]).merge(user_id: current_user.id)
