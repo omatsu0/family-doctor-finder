@@ -35,9 +35,10 @@
     = f.label :pdf
     = f.file_field :pdf
     = f.hidden_field :pdf_cache
-    %label
+    - if @clinic.pdf?
       = f.check_box :remove_pdf
-  画像を削除する
+      画像を削除する
+  
   = f.fields_for :consultation_hours do |ch|
     = render 'consultation_hour_fields', f: ch
   .links
