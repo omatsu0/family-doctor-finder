@@ -60,10 +60,17 @@ class ClinicsController < ApplicationController
 
   def download
     @clinic = Clinic.find(params[:clinic_id])
-    # ref: https://github.com/carrierwaveuploader/carrierwave#activerecord
-    filepath = @clinic.pdf.current_path
-    stat = File::stat(filepath)
-    send_file(filepath, :filename => @clinic.pdf_identifier, :length => stat.size)
+
+    region='ap-northeast-1'
+    bucket='fd-finder'
+    key ="uploads/clinic/pdf/#{@clinic.id}/#{@clinic.pdf_identifier}"
+    credentials=Aws::Credentials.new(
+      ENV['AWS_ACCESS_KEY_ID'],
+      ENV['AWS_SECRET_ACCESS_KEY']
+    )
+    client=Aws::S3::Client.new(region:region, credentials:credentials)
+    data=client.get_object(bucket:bucket, key:key).body
+    send_data data.read, filename: params[:file_name], disposition: 'attachment'
 
   end
 

@@ -19,7 +19,8 @@
 -# = image_tag(@clinic.pdf_url, width: 100) if @clinic.pdf?
 -if @clinic.pdf?
   = image_tag @clinic.pdf_url(:thumb)
-  = link_to "ダウンロード", clinic_download_path(@clinic.id)
+  -# = link_to "ダウンロード", clinic_download_path(@clinic.id)
+  = link_to "ダウンロードリンク", clinic_download_path(clinic_id:@clinic.id, file_name: @clinic.pdf_identifier)
 
 .row
   .col-8
