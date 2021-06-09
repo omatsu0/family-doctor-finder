@@ -2,6 +2,10 @@
   .form-group
     = f.label :day_of_week_id, "曜日"
     = f.collection_select :day_of_week_id, @dayofweeks,:id,:dayofweek_name,include_hidden: false
+    -# = f.collection_check_boxes(:day_of_week_id, @dayofweeks, :id, :dayofweek_name)
+  .form-group
+    = f.label :dayofweekn, "曜日2"
+    = f.collection_check_boxes(:dayofweekn, @dayofweeks, :id, :dayofweek_name,include_hidden: false)
   .form-group
     = f.label :start_at, "開始時間"
     = f.time_select :start_at

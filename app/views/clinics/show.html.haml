@@ -76,10 +76,20 @@
       -# %h5.card-header 診療開始時間
       -# .card-body
       -#   %p.card-text= @clinic.consultation_hours.pluck(:start_at)
-      - @clinic.consultation_hours.each do |hour|
-        %p= hour.day_of_week.dayofweek_name
-        %p= "#{hour.start_at.strftime('%H:%M')} ~ #{hour.end_at.strftime('%H:%M')}"
 
+      - @clinic.consultation_hours.each do |hour|
+        %table
+          %tr
+            %th="診療時間"
+            - @weeks.each do |week|
+              %th=week.dayofweek_name
+            %tr
+              %td= "#{hour.start_at.strftime('%H:%M')} ~ #{hour.end_at.strftime('%H:%M')}"
+              - (1..7).each do |n|
+                - if hour.dayofweekn.include?(n)
+                  %td="◯"
+                - else
+                  %td="-"
 %h2 所在地
 
 :css

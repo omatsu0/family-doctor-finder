@@ -19,7 +19,10 @@ class ClinicsController < ApplicationController
 
   def create
     @clinic = Clinic.new(clinic_params)
+    # @clinic.consultation_hours_attributes.day_of_week_id=current_user.id
     # @clinic.user_id = current_user.id
+    # binding.pry
+    # @clinic.consultation_hours.day_of_week_id=current_user.id
 
     if @clinic.save!
       redirect_to clinics_path, notice: "病院を登録しました"
@@ -49,6 +52,7 @@ class ClinicsController < ApplicationController
     clinic_id=@clinic.id
     @announcements = Announcement.where(clinic_id:clinic_id,is_valid:true)
     @consul_hours = ConsultationHour.where(clinic_id: clinic_id).pluck(:day_of_week_id,:start_at)
+    @weeks=DayOfWeek.all
   end
 
   def destroy
@@ -91,7 +95,11 @@ class ClinicsController < ApplicationController
         :phone_number, :introduction, :pdf, :pdf_cache, :remove_pdf, :is_pdf_ony, :is_valid,
         clinic_departments_attributes: [:id, :department_id,:_destroy,],
         location_attributes: [:id, :address, :post_address,:area_id],
-        consultation_hours_attributes: [:id, :start_at, :end_at, :day_of_week_id,:_destroy ]).merge(user_id: current_user.id)
+        consultation_hours_attributes: [:id, :start_at, :end_at,:_destroy,:day_of_week_id,{ dayofweekn:[] } ]).merge(user_id: current_user.id)
+  end
+
+  def dayofweek_params
+    params.require(:clinic).permit(consultation_hours_attributes: [:id, { day_of_week_id: []} ])
   end
 
 end
