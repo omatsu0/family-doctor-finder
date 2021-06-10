@@ -71,25 +71,23 @@
       .card-body
         %p.card-text= @clinic.departments.pluck(:department_name)
       %h5.card-header 診療曜日、時間
-      .card-body
-      -#   %p.card-text= @clinic.day_of_weeks.pluck(:dayofweek_name)
-      -# %h5.card-header 診療開始時間
-      -# .card-body
-      -#   %p.card-text= @clinic.consultation_hours.pluck(:start_at)
 
-      - @clinic.consultation_hours.each do |hour|
-        %table
-          %tr
-            %th="診療時間"
-            - @weeks.each do |week|
-              %th=week.dayofweek_name
+      .card-body
+        %table.table.table-bordered
+          %thead
             %tr
-              %td= "#{hour.start_at.strftime('%H:%M')} ~ #{hour.end_at.strftime('%H:%M')}"
-              - (1..7).each do |n|
-                - if hour.dayofweekn.include?(n)
-                  %td="◯"
-                - else
-                  %td="-"
+              %th{scope: "col"}診療時間
+              - @weeks.each do |week|
+                %th=week.name
+            %tbody
+            - @clinic.consultation_hours.each do |hour|
+              %tr
+                %th= "#{hour.start_at.strftime('%H:%M')} ~ #{hour.end_at.strftime('%H:%M')}"
+                - (1..8).each do |n|
+                  - if hour.day_of_weeks.include?(n)
+                    %td="◯"
+                  - else
+                    %td="-"
 %h2 所在地
 
 :css

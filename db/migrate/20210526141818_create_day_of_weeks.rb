@@ -1,7 +1,7 @@
 class CreateDayOfWeeks < ActiveRecord::Migration[6.0]
   def change
     create_table :day_of_weeks do |t|
-      t.string :dayofweek_name, null: false, unique: true
+      t.string :name, null: false, unique: true
 
       t.timestamps
     end

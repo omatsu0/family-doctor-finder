@@ -51,7 +51,7 @@ class ClinicsController < ApplicationController
   def show
     clinic_id=@clinic.id
     @announcements = Announcement.where(clinic_id:clinic_id,is_valid:true)
-    @consul_hours = ConsultationHour.where(clinic_id: clinic_id).pluck(:day_of_week_id,:start_at)
+    @consul_hours = ConsultationHour.where(clinic_id: clinic_id).pluck(:start_at)
     @weeks=DayOfWeek.all
   end
 
@@ -78,6 +78,18 @@ class ClinicsController < ApplicationController
 
   end
 
+  # def show_weeks
+  #   @clinic = Clinic.find(params[:clinic_id])
+  #   @openday=[]
+
+  #   @clinic.consultation_hours.each do|hour|
+  #     hour.dayofweekn.each do |i|
+  #       @week_id=DayOfWeek.where(id: i)
+  #       Openday << @week_id.name
+  #     end
+  #   end
+  # end
+
   private
 
   def find_clinic
@@ -95,7 +107,7 @@ class ClinicsController < ApplicationController
         :phone_number, :introduction, :pdf, :pdf_cache, :remove_pdf, :is_pdf_ony, :is_valid,
         clinic_departments_attributes: [:id, :department_id,:_destroy,],
         location_attributes: [:id, :address, :post_address,:area_id],
-        consultation_hours_attributes: [:id, :start_at, :end_at,:_destroy,:day_of_week_id,{ dayofweekn:[] } ]).merge(user_id: current_user.id)
+        consultation_hours_attributes: [:id, :start_at, :end_at,:_destroy,{ day_of_weeks:[] } ]).merge(user_id: current_user.id)
   end
 
   def dayofweek_params

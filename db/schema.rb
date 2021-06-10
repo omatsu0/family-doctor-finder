@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_08_182515) do
+ActiveRecord::Schema.define(version: 2021_05_31_124731) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,15 +59,14 @@ ActiveRecord::Schema.define(version: 2021_06_08_182515) do
     t.time "start_at"
     t.time "end_at"
     t.integer "clinic_id", null: false
-    t.integer "day_of_week_id", null: false
+    t.integer "day_of_weeks", default: [], array: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "dayofweekn", array: true
-    t.index ["clinic_id", "day_of_week_id"], name: "index_consultation_hours_on_clinic_id_and_day_of_week_id"
+    t.index ["clinic_id"], name: "index_consultation_hours_on_clinic_id"
   end
 
   create_table "day_of_weeks", force: :cascade do |t|
-    t.string "dayofweek_name", null: false
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -107,5 +106,4 @@ ActiveRecord::Schema.define(version: 2021_06_08_182515) do
   add_foreign_key "clinic_departments", "clinics"
   add_foreign_key "clinic_departments", "departments"
   add_foreign_key "consultation_hours", "clinics"
-  add_foreign_key "consultation_hours", "day_of_weeks"
 end

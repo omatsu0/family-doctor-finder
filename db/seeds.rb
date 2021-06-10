@@ -26,9 +26,6 @@ departments = Department.create!([
 ])
 
 User.create(email: 'test@gmail.com', password: 'password',admin: true)
-Clinic.create!(clinic_name: "田中病院" ,clinic_furigana: "たなかびょういん" ,clinic_admin_number: "右51" ,director_name:"田中太郎" ,phone_number:"123-456-7890" ,introduction: "全力尽くします" ,user_id: "1" ,pdf: "1234")
-ClinicDepartment.create!(clinic_id: "1", department_id: "1")
-
 areas = Area.create!([
   { name: "北区" },
   { name: "東山区" },
@@ -44,14 +41,12 @@ areas = Area.create!([
 ])
 
 dayofweeks = DayOfWeek.create!([
-  { dayofweek_name: "月" },
-  { dayofweek_name: "火" },
-  { dayofweek_name: "水" },
-  { dayofweek_name: "木" },
-  { dayofweek_name: "金" },
-  { dayofweek_name: "土" },
-  { dayofweek_name: "日" },
-  { dayofweek_name: "祝" }
+  { name: "月" },
+  { name: "火" },
+  { name: "水" },
+  { name: "木" },
+  { name: "金" },
+  { name: "土" },
+  { name: "日" },
+  { name: "祝" }
 ])
-
-ConsultationHour.create!(start_at: "2012-10-08 15:28:12", end_at: "2012-10-08 17:28:12", clinic_id: "1", day_of_week_id: "1")

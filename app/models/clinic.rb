@@ -5,7 +5,6 @@ class Clinic < ActiveRecord::Base
   belongs_to :user
   has_one :location, dependent: :destroy
   has_many :consultation_hours,inverse_of: :clinic
-  has_many :day_of_weeks,through: :consultation_hours
   has_many :clinic_departments
   has_many :departments, through: :clinic_departments
 
