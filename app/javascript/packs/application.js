@@ -10,6 +10,7 @@ require("channels")
 
 import "bootstrap"
 import "bootstrap/scss/bootstrap.scss"
+import "../src/style.scss";
 import "cocoon"
 
 // Uncomment to copy all static images under ../images to the output folder and reference

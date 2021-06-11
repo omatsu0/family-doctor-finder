@@ -14,12 +14,33 @@
  *= require_self
  */
 
- .mw-md {
+.test{
+  color: red;
+}
+.mw-md {
   max-width: 576px;
 }
 
 .mw-xl {
   max-width: 1200px;
+}
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+  color: red;
+}
+
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
 }
 
 //  .alert-notice {
