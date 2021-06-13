@@ -10,5 +10,6 @@
     = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
   %body
     = render partial: 'layouts/header'
-  %div{class: "container py-8"}
+    .pb-5
+  %div{class: "container py-10"}
     = yield

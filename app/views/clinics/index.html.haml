@@ -1,15 +1,47 @@
 = render 'layouts/flash_messages'
 
-%h1.test すべての病院一覧
+%h3.col-4.border-bottom すべての病院一覧
 
-%h3 文字列検索
-= search_form_for @q, url: search_clinics_path do |f|
-  = f.label :clinic_name_cont, '検索キーワード'
-  = f.search_field :clinic_name_cont
-  %br
-  = f.submit '検索'
+.text-center
+  %h5.mt-5
+  = search_form_for @q, url: search_clinics_path do |f|
+    = f.label :clinic_name_cont, '検索キーワード'
+    = f.search_field :clinic_name_cont
+    = f.submit '検索'
 
-%ul.list-group
-  - @clinics.each do |clinic|
-    = link_to(clinic, class: "list-group-item list-group-item-action") do
-      %h5.list-group-item-heading= clinic.clinic_name
+.table-responsive.pt-5
+  %table.table.table-sm
+    %thead.bg-info.text-white
+      %tr
+        %th 地区ID
+        %th 病院名
+        %th よみがな
+        %th 診療科
+        %th 
+    %tbody
+      - @clinics.each do |clinic|
+        %tr{"data-link" => "#{clinic_path(clinic.id)}"}
+          %td= clinic.location.area.name
+          %td= clinic.clinic_name
+          %td= clinic.clinic_furigana
+          %td= clinic.departments.pluck(:department_name)
+          %td= clinic.location.area.name
+
+:javascript
+  $("tr[data-link]").click(function() {
+    window.location = $(this).data("link")
+  })
+
+:css
+  tr:hover td {
+    background: #ecf2fa;
+    cursor:pointer;
+  }
+
+-# %ul.list-group
+-#   - @clinics.each do |clinic|
+-#     = link_to(clinic, class: "list-group-item list-group-item-action d-inline-flex") do
+-#       %h5.list-group-item.col-2.border-0= clinic.location.area.name
+-#       %h5.list-group-item.col-4.border-0= clinic.clinic_name
+-#       %h5.list-group-item.col-4.border-0= clinic.departments.pluck(:department_name)
+-#       %h5.list-group-item.col-2.border-0 地図アイコン、PDFアイコン
