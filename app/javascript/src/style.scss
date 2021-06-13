@@ -1,6 +1,21 @@
 .test{
   color: red;
 }
+tr:hover td {
+  background: #ecf2fa;
+  cursor:pointer;
+}
+.menu{
+  color:black;
+}
+.active{
+  background: #4488BB;
+  color: white;
+}
+.active:hover{
+  color: white;
+  text-decoration: none;
+}
 .mw-md {
   max-width: 576px;
 }

@@ -3,15 +3,41 @@
 %p ユーザID
 = @user.id
 
-%h5 登録or編集した病院一覧
-%ul.list-group
-  - @post_clinics.each do |clinic|
-    = link_to(clinic, class: "list-group-item list-group-item-action") do
-      %h5.list-group-item-heading= clinic.clinic_name
+%p ユーザ名
+= @user.username
 
+%h5 登録or編集した病院一覧
+-# %ul.list-group
+-#   - @post_clinics.each do |clinic|
+-#     = link_to(clinic, class: "list-group-item list-group-item-action") do
+-#       %h5.list-group-item-heading= clinic.clinic_name
+
+.table-responsive.pt-5
+  %table.table.table-sm
+    %thead.bg-info.text-white
+      %tr
+        %th 地区ID
+        %th 病院名
+        %th よみがな
+        %th 診療科
+        %th 
+    %tbody
+      - @post_clinics.each do |clinic|
+        %tr{"data-link" => "#{clinic_path(clinic.id)}"}
+          %td= clinic.location.area.name
+          %td= clinic.clinic_name
+          %td= clinic.clinic_furigana
+          %td= clinic.departments.pluck(:department_name)
+          %td= clinic.location.area.name
+          
 %h5 投稿したお知らせ一覧
 %ul.list-group
   - @announses.each do |announce|
     = link_to(announce.clinic, class: "list-group-item list-group-item-action") do
       %h5.list-group-item-heading= announce.body + '-' + announce.clinic.clinic_name
+
+:javascript
+  $("tr[data-link]").click(function() {
+    window.location = $(this).data("link")
+  })
 

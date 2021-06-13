@@ -1,6 +1,24 @@
 %h1 検索結果
 
-%ul.list-group
-  - @results.each do |clinic|
-    = link_to(clinic, class: "list-group-item list-group-item-action") do
-      %h5.list-group-item-heading= clinic.clinic_name
+.table-responsive.pt-5
+  %table.table.table-sm
+    %thead.bg-info.text-white
+      %tr
+        %th 地区ID
+        %th 病院名
+        %th よみがな
+        %th 診療科
+        %th 
+    %tbody
+      - @results.each do |clinic|
+        %tr{"data-link" => "#{clinic_path(clinic.id)}"}
+          %td= clinic.location.area.name
+          %td= clinic.clinic_name
+          %td= clinic.clinic_furigana
+          %td= clinic.departments.pluck(:department_name)
+          %td= clinic.location.area.name
+
+:javascript
+  $("tr[data-link]").click(function() {
+    window.location = $(this).data("link")
+  })

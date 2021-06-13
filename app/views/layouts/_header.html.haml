@@ -3,24 +3,24 @@
     = link_to "FamilyDoctorFinder", root_path, class: "navbar-brand mr-auto"
     %ul.navbar-nav
       - if user_signed_in?
-        %li.nav-item.active
+        %li.nav-item
           = link_to "病院を登録する", new_clinic_path, class: "nav-link"
-        %li.nav-item.active
+        %li.nav-item
           = link_to 'マイページ', user_path(current_user.id), class: 'nav-link'
-        %li.nav-item.active
+        %li.nav-item
           = link_to 'アカウント編集（あとで編集？）', edit_user_registration_path, class: 'nav-link'
-        %li.nav-item.active
+        %li.nav-item
           = link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'nav-link'
           - if current_user.admin == true
-            %li.nav-item.active
+            %li.nav-item
               = link_to "管理者画面", rails_admin_path, method: :get, class: 'nav-link'
       - else
-        %li.nav-item.active
+        %li.nav-item
           = link_to "新規登録(あとで削除)", new_user_registration_path, class: 'nav-link'
-        %li.nav-item.active
+        %li.nav-item
           = link_to "ログイン", new_user_session_path, class: 'nav-link'
 .container
   .text-center
-    = link_to '全医院一覧', root_path
-    = link_to '診療科から探す', departments_path,class: 'mr-auto'
-    = link_to 'エリアから探す', area_index_path
+    = link_to '全医院一覧', root_path,class: 'menu col-4'
+    = active_link_to '診療科から探す', departments_path,class: 'menu col-4'
+    = active_link_to 'エリアから探す', area_index_path,class: 'menu col-4'
