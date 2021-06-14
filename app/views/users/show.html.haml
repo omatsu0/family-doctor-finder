@@ -7,10 +7,6 @@
 = @user.username
 
 %h5 登録or編集した病院一覧
--# %ul.list-group
--#   - @post_clinics.each do |clinic|
--#     = link_to(clinic, class: "list-group-item list-group-item-action") do
--#       %h5.list-group-item-heading= clinic.clinic_name
 
 .table-responsive.pt-5
   %table.table.table-sm
@@ -30,12 +26,30 @@
           %td= clinic.departments.pluck(:department_name)
           %td= clinic.location.area.name
           
-%h5 投稿したお知らせ一覧
-%ul.list-group
-  - @announses.each do |announce|
-    = link_to(announce.clinic, class: "list-group-item list-group-item-action") do
-      %h5.list-group-item-heading= announce.body + '-' + announce.clinic.clinic_name
+-# %h5 投稿したお知らせ一覧
+-# %ul.list-group
+-#   - @announses.each do |announce|
+-#     = link_to(announce.clinic, class: "list-group-item list-group-item-action") do
+-#       %h5.list-group-item-heading= announce.body + '-' + announce.clinic.clinic_name
 
+.my-3.p-3.bg-white.rounded.shadow-sm
+  %h6.border-bottom.pb-2.mb-0 投稿したお知らせ一覧
+  - @announses.each do |announce|
+    = link_to(announce.clinic, class: "d-flex text-muted pt-3") do
+      .pb-3.mb-0.small.lh-sm.border-bottom.w-100
+        .d-flex.justify-content-between
+          %strong.text-gray-dark= announce.body
+        %span.d-block= announce.clinic.clinic_name
+        %span.d-block= announce.created_at
+
+-# .my-3.p-3.bg-white.rounded.shadow-sm
+-#   %h6.border-bottom.pb-2.mb-0 おすすめ
+-#   .d-flex.text-muted.pt-3
+-#     .pb-3.mb-0.small.lh-sm.border-bottom.w-100
+-#       .d-flex.justify-content-between
+-#         %strong.text-gray-dark フルネーム
+-#       %span.d-block @username
+    
 :javascript
   $("tr[data-link]").click(function() {
     window.location = $(this).data("link")
