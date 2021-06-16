@@ -2,9 +2,11 @@
 
 
 %h1.mt-3.mb-3
-  -# .btn.btn-outline-info.disabled= @clinic.clinic_admin_number
   %span.border.border-right-0.border-left-0.border-info.admin-num.align-self-center= @clinic.clinic_admin_number
-  = @clinic.clinic_name 
+  %br
+  = @clinic.clinic_name
+  .text-muted.d-inline-flex.small
+    = @clinic.clinic_furigana
 
 %p
 - if user_signed_in?
@@ -58,7 +60,7 @@
         %tbody
         - @clinic.consultation_hours.each do |hour|
           %tr
-            %th= "#{hour.start_at.strftime('%H:%M')} ~ #{hour.end_at.strftime('%H:%M')}"
+            %th.text-nowrap= "#{hour.start_at.strftime('%H:%M')} ~ #{hour.end_at.strftime('%H:%M')}"
             - (1..8).each do |n|
               - if hour.day_of_weeks.include?(n)
                 %td="◯"
@@ -80,6 +82,40 @@
     %span.badge.badge-info=@clinic.location.area.name
     = @clinic.location.address
   %br
-  %i.fa.fa-user-md{"aria-hidden" => "true"}
+  %i.fa.fa-user-md.fa-2x{"aria-hidden" => "true"}
   医院長名:
   = @clinic.director_name
+
+%h5#location-map.mt-5.pb-2.sub-title 所在地
+
+:css
+  #map { height: 300px;}
+%script{async: "", defer: "defer", src: "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_API_KEY']}&callback=initMap"}
+%script{src: "//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"}
+%script{src: "//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js", type: "text/javascript"}
+#map
+:javascript
+  function initMap() {
+    var latlng = new google.maps.LatLng(
+      #{@clinic.location.latitude},
+      #{@clinic.location.longitude}
+      );
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 15,
+      center: latlng
+    });
+    var marker = new google.maps.Marker({
+      position: latlng,
+      map: map
+    });
+    var infowindow = new google.maps.InfoWindow({
+      content: '<a href="https://www.google.com/maps/search/?api=1&query=#{@clinic.location.latitude},#{@clinic.location.longitude}" target="_blank" rel="noopener noreferrer">google mapで開く</a>',
+    });
+    infowindow.open(map, marker);
+    google.maps.event.addListener(infowindow, "closeclick", function() {
+      google.maps.event.addListenerOnce(marker, "click", function(event) {
+        infowindow.open(map, marker);
+      });
+    });
+  }
+  initMap();
