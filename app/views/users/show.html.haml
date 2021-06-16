@@ -1,14 +1,29 @@
 %h1 マイページ
 
-%p ユーザID
-= @user.id
+.my-3.p-3.bg-white.rounded.shadow-sm
+  .row
+    .col-5
+      %i.fa.fa-user-circle.fa-5x{"aria-hidden" => "true"}
+      %p ユーザID
+      = @user.id
 
-%p ユーザ名
-= @user.username
+      %p ユーザ名
+      = @user.username
+
+    .col-7
+      .my-3.p-3.bg-white.rounded.shadow-sm
+        %h6.border-bottom.pb-2.mb-0 投稿したお知らせ一覧
+        - @announses.each do |announce|
+          = link_to(announce.clinic, class: "d-flex text-muted pt-3") do
+            .pb-3.mb-0.small.lh-sm.border-bottom.w-100
+              .d-flex.justify-content-between
+                %strong.text-gray-dark= announce.body
+              %span= announce.clinic.clinic_name
+              %span= l announce.updated_at
 
 %h5 登録or編集した病院一覧
 
-.table-responsive.pt-5
+.table-responsive.mt-5.shadow-sm
   %table.table.table-sm
     %thead.bg-info.text-white
       %tr
@@ -39,8 +54,8 @@
       .pb-3.mb-0.small.lh-sm.border-bottom.w-100
         .d-flex.justify-content-between
           %strong.text-gray-dark= announce.body
-        %span.d-block= announce.clinic.clinic_name
-        %span.d-block= announce.created_at
+        %span= announce.clinic.clinic_name
+        %span= l announce.updated_at
 
 -# .my-3.p-3.bg-white.rounded.shadow-sm
 -#   %h6.border-bottom.pb-2.mb-0 おすすめ

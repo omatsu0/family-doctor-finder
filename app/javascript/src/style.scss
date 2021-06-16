@@ -1,5 +1,20 @@
-.test{
-  color: red;
+.sub-title {
+  border-bottom: 1px solid #4488BB;
+}
+.introduction-data{
+  margin-top: 16px;
+  padding: 12px;
+  background: #E8F6F7;
+  border-radius: 4px;
+}
+.disabled{
+  cursor: default;
+}
+.admin-num{
+  font-size: medium;
+  color: #4488BB;
+  padding: 8px;
+  vertical-align: middle;
 }
 tr:hover td {
   background: #ecf2fa;

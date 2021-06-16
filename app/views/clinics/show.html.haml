@@ -1,123 +1,85 @@
 = render 'layouts/flash_messages'
 
-%h1.mt-3.mb-3.mr-auto= @clinic.clinic_name
+
+%h1.mt-3.mb-3
+  -# .btn.btn-outline-info.disabled= @clinic.clinic_admin_number
+  %span.border.border-right-0.border-left-0.border-info.admin-num.align-self-center= @clinic.clinic_admin_number
+  = @clinic.clinic_name 
+
+%p
 - if user_signed_in?
   = link_to "編集", edit_clinic_path, class: "btn btn-info btn-sm mb-3"
   = link_to "お知らせを書く", new_clinic_announcement_path(@clinic.id), class: "btn btn-info btn-sm mb-3"
 
-%ul.list-group
-  - @announcements.each do |announce|
-    - if announce.priority == 2
-      %h5.list-group-item-heading.text-danger.mb-0.pb-0= announce.body
-    - else
-      %h5.list-group-item-heading.mb-0.pb-0= announce.body
+-if @announcements.present?
+  .my-3.p-3.bg-white.rounded.shadow-sm
+    %h6.border-bottom.pb-2.mb-0 お知らせ
+    - @announcements.each do |announce|
+      .d-flex.text-muted.pt-3
+        .pb-3.mb-0.small.lh-sm.border-bottom.w-100
+          .d-flex.justify-content-between
+            - if announce.priority == 2
+              %strong.text-danger= announce.body
+            - else
+              %strong= announce.body
 
-    .list-group-item-heading.mt-0.pt-0=  '-' + announce.user.username
-    - if user_signed_in? && current_user.id==announce.user_id
-      = link_to "お知らせを編集", edit_clinic_announcement_path(@clinic.id,announce.id)
+            %span= announce.user.username
+            %span.text-muted= l announce.updated_at
+            - if user_signed_in? && current_user.id==announce.user_id
+              = link_to "お知らせを編集", edit_clinic_announcement_path(@clinic.id,announce.id)
 
--# = image_tag(@clinic.pdf_url, width: 100) if @clinic.pdf?
--if @clinic.pdf?
-  = image_tag @clinic.pdf_url(:thumb)
-  -# = link_to "ダウンロード", clinic_download_path(@clinic.id)
-  = link_to "ダウンロードリンク", clinic_download_path(clinic_id:@clinic.id, file_name: @clinic.pdf_identifier)
+.row.d-flex.justify-content-between.mt-5
+  .col-5.align-self-center
+    .text-center
+      - if @clinic.pdf?
+        = link_to clinic_download_path(clinic_id:@clinic.id, file_name: @clinic.pdf_identifier),method: :get do
+          %i.far.fa-file-pdf.fa-2x
+          PDFをダウンロード
+        %br
+        = image_tag @clinic.pdf_url(:thumb)
+      - else
+        %i.fas.fa-image.fa-3x
+        %br
+        NO PDF
+      
 
-.row
-  .col
-    .card.mb-2
-      %h5.card-header 読み仮名
-      .card-body
-        %p.card-text= @clinic.clinic_furigana
-      %h5.card-header 管理番号
-      .card-body
-        %p.card-text= @clinic.clinic_admin_number
-      %h5.card-header 医院長名
-      .card-body
-        %p.card-text= @clinic.director_name
-      %h5.card-header 電話番号
-      .card-body
-        %p.card-text= @clinic.phone_number
-      %h5.card-header 紹介文
-      .card-body
-        %p.card-text= @clinic.introduction
-      %h5.card-header 登録ユーザ
-      .card-body
-        %p.card-text= @clinic.user_id
-      %h5.card-header pdfURL
-      .card-body
-        %p.card-text= @clinic.pdf
-      %h5.card-header PDFのみフラグ
-      .card-body
-        %p.card-text= @clinic.is_pdf_ony
-      %h5.card-header 表示フラグ
-      .card-body
-        %p.card-text= @clinic.is_valid
-      %h5.card-header 作成日
-      .card-body
-        %p.card-text= @clinic.created_at
-      %h5.card-header 更新日
-      .card-body
-        %p.card-text= @clinic.updated_at
-      %h5.card-header 住所
-      .card-body
-        %p.card-text= @clinic.location.address
-      %h5.card-header 地区
-      .card-body
-        %p.card-text= @clinic.location.area.name
-      %h5.card-header 郵便番号
-      .card-body
-        %p.card-text= @clinic.location.post_address
-      %h5.card-header 診療科
-      .card-body
-        %p.card-text= @clinic.departments.pluck(:department_name)
-      %h5.card-header 診療曜日、時間
+  .col-5
+    %h5.mt-3.pb-2.sub-title 診療科
+    %p
+      = @clinic.departments.pluck(:department_name).join(" / ")
 
-      .card-body
-        %table.table.table-bordered
-          %thead
-            %tr
-              %th{scope: "col"}診療時間
-              - @weeks.each do |week|
-                %th=week.name
-            %tbody
-            - @clinic.consultation_hours.each do |hour|
-              %tr
-                %th= "#{hour.start_at.strftime('%H:%M')} ~ #{hour.end_at.strftime('%H:%M')}"
-                - (1..8).each do |n|
-                  - if hour.day_of_weeks.include?(n)
-                    %td="◯"
-                  - else
-                    %td="-"
-%h2 所在地
+    %h5.mt-5.pb-2.sub-title 診療時間
+    %table.table.table-bordered.mt-3
+      %thead
+        %tr
+          %th{scope: "col"}診療時間
+          - @weeks.each do |week|
+            %th=week.name
+        %tbody
+        - @clinic.consultation_hours.each do |hour|
+          %tr
+            %th= "#{hour.start_at.strftime('%H:%M')} ~ #{hour.end_at.strftime('%H:%M')}"
+            - (1..8).each do |n|
+              - if hour.day_of_weeks.include?(n)
+                %td="◯"
+              - else
+                %td="-"
 
-:css
-  #map { height: 300px;}
-%script{async: "", defer: "defer", src: "https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_API_KEY']}&callback=initMap"}
-%script{src: "//cdn.rawgit.com/mahnunchik/markerclustererplus/master/dist/markerclusterer.min.js"}
-%script{src: "//cdn.rawgit.com/printercu/google-maps-utility-library-v3-read-only/master/infobox/src/infobox_packed.js", type: "text/javascript"}
-#map
-:javascript
-  function initMap() {
-    var latlng = new google.maps.LatLng(
-      #{@clinic.location.latitude},
-      #{@clinic.location.longitude}
-      );
-    var map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 15,
-      center: latlng
-    });
-    var marker = new google.maps.Marker({
-      position: latlng,
-      map: map
-    });
-    var infowindow = new google.maps.InfoWindow({
-      content: '<a href="https://www.google.com/maps/search/?api=1&query=#{@clinic.location.latitude},#{@clinic.location.longitude}" target="_blank" rel="noopener noreferrer">google mapで開く</a>',
-    });
-    infowindow.open(map, marker);
-    google.maps.event.addListener(infowindow, "closeclick", function() {
-      google.maps.event.addListenerOnce(marker, "click", function(event) {
-        infowindow.open(map, marker);
-      });
-    });
-  }
-  initMap();
+%h5.mt-5.pb-2.sub-title 紹介文
+.col.introduction-data.text-muted
+  = @clinic.introduction
+
+%h5.mt-5.pb-2.sub-title 施設情報
+%p
+  TEL 
+  = @clinic.phone_number
+  %br
+  〒
+  = @clinic.location.post_address
+  %br
+    %span.badge.badge-info=@clinic.location.area.name
+    = @clinic.location.address
+  %br
+  %i.fa.fa-user-md{"aria-hidden" => "true"}
+  医院長名:
+  = @clinic.director_name
