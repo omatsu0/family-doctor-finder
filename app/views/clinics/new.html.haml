@@ -3,45 +3,47 @@
 = form_with(model: @clinic, method: :post, local: true, html: { class: "form-horizontal" }) do |f|
   #errors
   .form-group
-    = f.label :clinic_name
+    = f.label :clinic_name,"病院名"
     = f.text_field :clinic_name, class: "form-control"
   .form-group
-    = f.label :clinic_furigana
+    = f.label :clinic_furigana,"病院名（ふりがな）"
     = f.text_field :clinic_furigana, class: "form-control"
   .form-group
-    = f.label :clinic_admin_number
+    = f.label :clinic_admin_number,"管理番号"
     = f.text_field :clinic_admin_number, class: "form-control"
   = f.fields_for :location do |fin|
     .form-group
-      = fin.label :address
-      = fin.text_field :address
+      = fin.label :address,"住所"
+      = fin.text_area :address,class: "form-control", row: 3
     .form-group
-      = fin.label :post_address
+      = fin.label :post_address,"郵便番号"
       = fin.text_field :post_address
     .form-group
-      = fin.label :area_id
+      = fin.label :area_id,"地区"
       = fin.collection_select :area_id, @areas, :id, :name,include_hidden: false
   .form-group
-    = f.label :director_name
+    = f.label :director_name,"院長名"
     = f.text_field :director_name, class: "form-control"
   .form-group
-    = f.label :phone_number
+    = f.label :phone_number,"電話番号"
     = f.text_field :phone_number, class: "form-control"
   .form-group
-    = f.label :introduction
+    = f.label :introduction,"紹介文"
     = f.text_area :introduction, class: "form-control", row: 10
   .form-group
-    = f.label :pdf
+    = f.label :pdf,"パンフレットPDF"
     = f.file_field :pdf
-  = f.fields_for :consultation_hours do |ch|
-    = render 'consultation_hour_fields', f: ch
-  .links
-    = link_to_add_association '＋別の診療時間を追加', f, :consultation_hours
-  = f.fields_for :clinic_departments do |cd|
-    = render 'clinic_department_fields', f: cd
-  .links
-    = link_to_add_association '＋別の診療科目を追加', f, :clinic_departments
-  .form-group
+  .mt-5
+    = f.fields_for :consultation_hours do |ch|
+      = render 'consultation_hour_fields', f: ch
+    .links
+      = link_to_add_association '＋別の診療時間を追加', f, :consultation_hours
+  .mt-5
+    = f.fields_for :clinic_departments do |cd|
+      = render 'clinic_department_fields', f: cd
+    .links
+      = link_to_add_association '＋別の診療科目を追加', f, :clinic_departments
+  .form-group.mt-5
     = f.check_box :is_valid, checked: true
     = f.label :is_valid, "公開する"
 

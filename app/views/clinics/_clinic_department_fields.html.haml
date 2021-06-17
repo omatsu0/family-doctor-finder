@@ -2,5 +2,6 @@
   .form-group
     = f.label :department_id,"診療科目"
     = f.collection_select :department_id, @departments, :id, :department_name,include_hidden: false
+    %br
     
     = link_to_remove_association '削除', f
