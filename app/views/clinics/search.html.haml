@@ -15,7 +15,7 @@
           %td= clinic.location.area.name
           %td= clinic.clinic_name
           %td= clinic.clinic_furigana
-          %td= clinic.departments.pluck(:department_name)
+          %td= clinic.departments.pluck(:department_name).join(" / ")
           %td= clinic.location.area.name
 
 :javascript

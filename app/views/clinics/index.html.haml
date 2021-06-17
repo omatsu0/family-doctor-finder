@@ -34,17 +34,3 @@
   $("tr[data-link]").click(function() {
     window.location = $(this).data("link")
   })
-
--# :css
--#   tr:hover td {
--#     background: #ecf2fa;
--#     cursor:pointer;
--#   }
-
--# %ul.list-group
--#   - @clinics.each do |clinic|
--#     = link_to(clinic, class: "list-group-item list-group-item-action d-inline-flex") do
--#       %h5.list-group-item.col-2.border-0= clinic.location.area.name
--#       %h5.list-group-item.col-4.border-0= clinic.clinic_name
--#       %h5.list-group-item.col-4.border-0= clinic.departments.pluck(:department_name)
--#       %h5.list-group-item.col-2.border-0 地図アイコン、PDFアイコン

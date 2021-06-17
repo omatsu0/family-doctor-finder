@@ -1,6 +1,9 @@
 class ClinicsController < ApplicationController
   before_action :find_clinic, only: [:show, :edit, :update, :destroy]
   before_action :set_q, only: [:index, :search]
+  before_action :set_areas, only: [:new, :create, :edit, :update]
+  before_action :set_dayofweeks, only: [:new, :create, :edit, :update]
+  before_action :set_departments, only: [:new, :create, :edit, :update]
 
   def index
     @clinics = Clinic.where(is_valid:true).order(:clinic_furigana)
@@ -14,7 +17,7 @@ class ClinicsController < ApplicationController
 
     @dayofweeks=DayOfWeek.all
     @departments = Department.all
-    @areas = Area.all
+    # @areas = Area.all
   end
 
   def create
@@ -24,7 +27,7 @@ class ClinicsController < ApplicationController
     # binding.pry
     # @clinic.consultation_hours.day_of_week_id=current_user.id
 
-    if @clinic.save!
+    if @clinic.save
       redirect_to clinics_path, notice: "病院を登録しました"
     else
       render :new, notice: "登録に失敗しました"
@@ -34,9 +37,9 @@ class ClinicsController < ApplicationController
   def edit
     @clinic = Clinic.find(params[:id])
 
-    @dayofweeks=DayOfWeek.all
-    @departments = Department.all
-    @areas = Area.all
+    # @dayofweeks=DayOfWeek.all
+    # @departments = Department.all
+    # @areas = Area.all
   end
 
   def update
@@ -100,6 +103,18 @@ class ClinicsController < ApplicationController
     @q = Clinic.ransack(params[:q])
   end
 
+  def set_areas
+    @areas = Area.all
+  end
+
+  def set_dayofweeks
+    @dayofweeks = DayOfWeek.all
+  end
+
+  def set_departments
+    @departments = Department.all
+  end
+
   def clinic_params
     params
       .require(:clinic).permit(
@@ -108,10 +123,6 @@ class ClinicsController < ApplicationController
         clinic_departments_attributes: [:id, :department_id,:_destroy,],
         location_attributes: [:id, :address, :post_address,:area_id],
         consultation_hours_attributes: [:id, :start_at, :end_at,:_destroy,{ day_of_weeks:[] } ]).merge(user_id: current_user.id)
-  end
-
-  def dayofweek_params
-    params.require(:clinic).permit(consultation_hours_attributes: [:id, { day_of_week_id: []} ])
   end
 
 end

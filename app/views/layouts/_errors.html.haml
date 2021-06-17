@@ -1,0 +1,8 @@
+- if obj.errors.any?
+  .alert.alert-danger{role: "alert"}
+    #error_explanation
+      %h3
+        %strong 入力内容にエラーがあります。
+      %ul
+        - obj.errors.full_messages.each do |message|
+          %li= message

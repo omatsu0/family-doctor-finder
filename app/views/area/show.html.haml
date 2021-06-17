@@ -15,18 +15,10 @@
           %td= area_clinic.clinic.location.area.name
           %td= area_clinic.clinic.clinic_name
           %td= area_clinic.clinic.clinic_furigana
-          %td= area_clinic.clinic.departments.pluck(:department_name)
+          %td= area_clinic.clinic.departments.pluck(:department_name).join(" / ")
           %td= area_clinic.clinic.location.area.name
 
 :javascript
   $("tr[data-link]").click(function() {
     window.location = $(this).data("link")
   })
-
--# - @locations.each do |area_clinic|
--#   = link_to(area_clinic.clinic, class: "list-group-item list-group-item-action") do
--#     = area_clinic.clinic.clinic_name
-
--# = debug @locations.clinic
--# %h5 ああああ
--# = debug @area.locations
