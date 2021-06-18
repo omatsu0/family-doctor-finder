@@ -2,24 +2,17 @@
 
 .my-3.p-3.bg-white.rounded.shadow-sm
   .row
-    .col-5
+    .col-2.ml-3
       %i.fa.fa-user-circle.fa-5x{"aria-hidden" => "true"}
-      %p ユーザID
-      = @user.id
+    .col-5
+      %p.mt-3.mb-0
+        ユーザID
+      .font-weight-bolder.font-italic.ml-2
+        = @user.id
 
-      %p ユーザ名
-      = @user.username
-
-    .col-7
-      .my-3.p-3.bg-white.rounded.shadow-sm
-        %h6.border-bottom.pb-2.mb-0 投稿したお知らせ一覧
-        - @announses.each do |announce|
-          = link_to(announce.clinic, class: "d-flex text-muted pt-3") do
-            .pb-3.mb-0.small.lh-sm.border-bottom.w-100
-              .d-flex.justify-content-between
-                %strong.text-gray-dark= announce.body
-              %span= announce.clinic.clinic_name
-              %span= l announce.updated_at
+      %p.mt-3.mb-0 ユーザ名
+      .font-weight-bolder.font-italic.ml-2
+        = @user.username
 
 %h5 登録or編集した病院一覧
 
