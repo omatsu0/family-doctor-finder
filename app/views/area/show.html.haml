@@ -16,7 +16,12 @@
           %td= area_clinic.clinic.clinic_name
           %td= area_clinic.clinic.clinic_furigana
           %td= area_clinic.clinic.departments.pluck(:department_name).join(" / ")
-          %td= area_clinic.clinic.location.area.name
+          %td
+            - if area_clinic.clinic.pdf?
+              = link_to clinic_download_path(clinic_id:area_clinic.clinic.id, file_name: area_clinic.clinic.pdf_identifier),method: :get do
+                %i.far.fa-file-pdf.mr-3
+            = link_to clinic_path(id:area_clinic.clinic.id,anchor: 'location-map'),method: :get do
+              %i.fas.fa-map-marked-alt
 
 :javascript
   $("tr[data-link]").click(function() {
