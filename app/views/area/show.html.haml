@@ -1,27 +1,6 @@
 %h5= @area.name
 
-.table-responsive.pt-5
-  %table.table.table-sm
-    %thead.bg-info.text-white
-      %tr
-        %th 地区ID
-        %th 病院名
-        %th よみがな
-        %th 診療科
-        %th 
-    %tbody
-      - @locations.each do |area_clinic|
-        %tr{"data-link" => "#{clinic_path(area_clinic.clinic.id)}"}
-          %td= area_clinic.clinic.location.area.name
-          %td= area_clinic.clinic.clinic_name
-          %td= area_clinic.clinic.clinic_furigana
-          %td= area_clinic.clinic.departments.pluck(:department_name).join(" / ")
-          %td
-            - if area_clinic.clinic.pdf?
-              = link_to clinic_download_path(clinic_id:area_clinic.clinic.id, file_name: area_clinic.clinic.pdf_identifier),method: :get do
-                %i.far.fa-file-pdf.mr-3
-            = link_to clinic_path(id:area_clinic.clinic.id,anchor: 'location-map'),method: :get do
-              %i.fas.fa-map-marked-alt
+= render 'clinics/clinic_table', clinics: @locations
 
 :javascript
   $("tr[data-link]").click(function() {

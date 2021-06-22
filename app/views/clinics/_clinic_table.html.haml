@@ -8,17 +8,17 @@
         %th 診療科
         %th PDF・地図
     %tbody
-      - clinics.each do |clinic|
-        %tr{"data-link" => "#{clinic_path(clinic.id)}"}
-          %td= clinic.location.area.name
-          %td= clinic.clinic_name
-          %td= clinic.clinic_furigana
-          %td= clinic.departments.pluck(:department_name).join(" / ")
+      - clinics.each do |some_clinic|
+        %tr{"data-link" => "#{clinic_path(some_clinic.clinic.id)}"}
+          %td= some_clinic.clinic.location.area.name
+          %td= some_clinic.clinic.clinic_name
+          %td= some_clinic.clinic.clinic_furigana
+          %td= some_clinic.clinic.departments.pluck(:department_name).join(" / ")
           %td
-            - if clinic.pdf?
-              = link_to clinic_download_path(clinic_id:clinic.id, file_name: clinic.pdf_identifier),method: :get do
+            - if some_clinic.clinic.pdf?
+              = link_to clinic_download_path(clinic_id:some_clinic.clinic.id, file_name: some_clinic.clinic.pdf_identifier),method: :get do
                 %i.far.fa-file-pdf.mr-3
-            = link_to clinic_path(id:clinic.id,anchor: 'location-map'),method: :get do
+            = link_to clinic_path(id:some_clinic.clinic.id,anchor: 'location-map'),method: :get do
               %i.fas.fa-map-marked-alt
 
 :javascript

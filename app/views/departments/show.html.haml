@@ -1,6 +1,6 @@
 %h5= @department.department_name
 
-= render 'clinics/clinic_table', clinics: @department.clinic_departments.clinic
+= render 'clinics/clinic_table', clinics: @department.clinic_departments
 
 :javascript
   $("tr[data-link]").click(function() {
