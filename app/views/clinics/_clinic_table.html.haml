@@ -8,7 +8,7 @@
         %th 診療科
         %th PDF・地図
     %tbody
-      - @clinics.each do |clinic|
+      - clinics.each do |clinic|
         %tr{"data-link" => "#{clinic_path(clinic.id)}"}
           %td= clinic.location.area.name
           %td= clinic.clinic_name

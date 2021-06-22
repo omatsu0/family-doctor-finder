@@ -7,7 +7,7 @@
     = f.search_field :clinic_name_cont
     = f.submit '検索'
 
-= render 'clinic_table', clinic: @clinic 
+= render 'clinic_table', clinics: @clinics
 
 :javascript
   $("tr[data-link]").click(function() {
