@@ -8,15 +8,15 @@
         %li.nav-item
           = active_link_to 'マイページ', user_path(current_user.id), class: 'nav-link menu'
         %li.nav-item
-          = active_link_to 'アカウント編集（あとで編集？）', edit_user_registration_path, class: 'nav-link'
+          = active_link_to 'アカウント編集', edit_user_registration_path, class: 'nav-link'
         %li.nav-item
           = link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'nav-link'
           - if current_user.admin == true
             %li.nav-item
               = link_to "管理者画面", rails_admin_path, method: :get, class: 'nav-link'
+           %li.nav-item
+              = link_to "新規登録", new_user_registration_path, class: 'nav-link'
       - else
-        %li.nav-item
-          = link_to "新規登録(あとで削除)", new_user_registration_path, class: 'nav-link'
         %li.nav-item
           = active_link_to "ログイン", new_user_session_path, class: 'nav-link'
 .container
