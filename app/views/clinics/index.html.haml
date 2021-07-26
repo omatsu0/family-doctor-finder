@@ -19,7 +19,7 @@
     %tbody
       - @clinics.each do |clinic|
         %tr{"data-link" => "#{clinic_path(clinic.id)}"}
-          %td= clinic.location.area.name
+          %td= clinic.clinic_admin_number
           %td= clinic.clinic_name
           %td= clinic.clinic_furigana
           %td= clinic.departments.pluck(:department_name).join(" / ")
