@@ -3,7 +3,7 @@
 .text-center
   %h5.mt-5
   = search_form_for @q, url: search_clinics_path do |f|
-    = f.label :clinic_name_cont, '検索キーワード'
+    = f.label :clinic_name_cont, '病院名検索'
     = f.search_field :clinic_name_cont
     = f.submit '検索'
 
