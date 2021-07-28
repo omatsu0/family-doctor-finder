@@ -3,7 +3,7 @@
 .text-center
   %h5.mt-5
   = search_form_for @q, url: search_clinics_path do |f|
-    = f.label :clinic_name_cont, '検索キーワード'
+    = f.label :clinic_name_cont, '病院名検索'
     = f.search_field :clinic_name_cont
     = f.submit '検索'
 
@@ -19,7 +19,7 @@
     %tbody
       - @clinics.each do |clinic|
         %tr{"data-link" => "#{clinic_path(clinic.id)}"}
-          %td= clinic.location.area.name
+          %td= clinic.clinic_admin_number
           %td= clinic.clinic_name
           %td= clinic.clinic_furigana
           %td= clinic.departments.pluck(:department_name).join(" / ")

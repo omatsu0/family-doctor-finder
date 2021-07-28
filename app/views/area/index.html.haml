@@ -3,6 +3,9 @@
     - @areas.each do |area|
       = link_to area.name, area, class: "btn btn-info btn-sm mb-3"
 
+  %p
+    ▼画像の地区をクリックで一覧へ
+
   = image_tag 'kyotomap.gif',usemap: "#ImageMap"
   %map{name: "ImageMap"}
     %area{alt: "nishigyou", coords: "116,424,124,441,117,453,114,464,119,475,102,482,90,486,92,500,87,518,76,539,87,539,98,531,123,537,130,533,140,527,151,519,167,519,169,507,164,486,176,486,190,488,203,485,196,471,186,450,172,454,166,436,154,430,137,426,128,411", href: "/area/3", shape: "poly", title: "nishigyou"}/

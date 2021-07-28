@@ -34,6 +34,9 @@ tr:hover td {
 .navbar-light .navbar-nav .show > .nav-link, .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .nav-link.active {
   color: white;
 }
+.nested-fields .form-group label {
+  margin-right: 10px;
+}
 .mw-md {
   max-width: 576px;
 }
