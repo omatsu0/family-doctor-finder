@@ -24,15 +24,20 @@
         %th 病院名
         %th よみがな
         %th 診療科
-        %th 
+        %th PDF・地図
     %tbody
-      - @post_clinics.each do |clinic|
+      - @post_clinics.includes(:location).each do |clinic|
         %tr{"data-link" => "#{clinic_path(clinic.id)}"}
           %td= clinic.location.area.name
           %td= clinic.clinic_name
           %td= clinic.clinic_furigana
           %td= clinic.departments.pluck(:department_name).join(" / ")
-          %td= clinic.location.area.name
+          %td 
+            - if clinic.pdf?
+              = link_to clinic_download_path(clinic_id:clinic.id, file_name: clinic.pdf_identifier),method: :get do
+                %i.far.fa-file-pdf.mr-3
+              = link_to clinic_path(id:clinic.id,anchor: 'location-map'),method: :get do
+                %i.fas.fa-map-marked-alt
 
 .my-3.p-3.bg-white.rounded.shadow-sm
   %h6.border-bottom.pb-2.mb-0 投稿したお知らせ一覧
