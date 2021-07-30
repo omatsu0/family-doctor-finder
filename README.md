@@ -1,24 +1,56 @@
-# README
+FamilyDoctorFinder
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+主に総合病院などが連携する開業医さんを登録、検索する業務システムです。
+患者さんの症状が安定し、総合病院にかかる必要がなくなった患者さんに、通いやすいかかりつけ医を紹介する際に総合病院側が使用します。
 
-Things you may want to cover:
+URL：https://fd-finder.herokuapp.com/
 
-* Ruby version
+概要
+  使用対象者：
+  総合病院の事務員さん、看護師さん、医師や救急救命士の方など
 
-* System dependencies
+  使用例：
+    ①連携するかかりつけ医さんの情報を、登録権限があるユーザが登録
+    ②医師や専門の事務員が、患者さんに通いやすいかかりつけ医さんを紹介する際エリアや診療科目、病院名で検索
+    ③診察日など詳細を確認し、かかりつけ医へ問い合わせる
 
-* Configuration
+開発した目的・背景
+・Railsを学習してから期間が空いてしまったので、復習と基本動作を定着させるため
+・実務により近しいシステムを作成することで、ユーザに使われることを意識した開発を行うため
+・実際のシステムはサーバーの関係上、機能部分をJSのみで作成したので、サーバサイド言語が使えたら実装したかった機能を盛り込んだ。
 
-* Database creation
+使用技術
+* フロントエンド
+    * jQuery 1.12.4
+    * HTML / SCSS / Bootstrap
+* バックエンド
+    * Ruby 2.6.6
+    * Ruby on Rails 6.0.3
+    * Google MapAPI
+* インフラ
+    * postgres 13.3
+    * Heroku（HerokuーCLI/7.54.0 darwin-x64 node-v12.21.0）
+    * AWS（S3）
+* その他使用ツール
+    * Visual Studio Code
+    * cacoo
+    * draw.io
+    * Google spread sheet
 
-* Database initialization
+機能一覧
+* ユーザー登録関連
+    * ログイン、ログアウト機能
+    * 管理画面（新規登録、ユーザ名編集など）
+* マイページ機能（投稿済みアナウンス、登録病院一覧）
+* PDFアップ/ダウンロード機能 (AWS S3バケット)
+* GoogleMap API
+    * 住所から地図表示
+* マップリンク
+* 病院情報登録、編集機能
+    * 論理削除
+* 検索機能
+    * 病院名の検索
+* お知らせ投稿機能
+* 診療科・地図別一覧
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+工夫したところ
