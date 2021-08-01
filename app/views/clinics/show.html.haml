@@ -1,7 +1,9 @@
 = render 'layouts/flash_messages'
 
-
-%h1.mt-3.mb-3
+.text-right.text-muted.small="更新日："+ @clinic.updated_at.strftime('%Y/%m/%d/%H:%M')
+%span
+.text-right.text-muted.small="更新者："+ @clinic.user.username
+%h1.mb-3
   %span.border.border-right-0.border-left-0.border-info.admin-num.align-self-center= @clinic.clinic_admin_number
   %br
   = @clinic.clinic_name
