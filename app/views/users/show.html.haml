@@ -36,8 +36,8 @@
             - if clinic.pdf?
               = link_to clinic_download_path(clinic_id:clinic.id, file_name: clinic.pdf_identifier),method: :get do
                 %i.far.fa-file-pdf.mr-3
-              = link_to clinic_path(id:clinic.id,anchor: 'location-map'),method: :get do
-                %i.fas.fa-map-marked-alt
+            = link_to clinic_path(id:clinic.id,anchor: 'location-map'),method: :get do
+              %i.fas.fa-map-marked-alt
 
 .my-3.p-3.bg-white.rounded.shadow-sm
   %h6.border-bottom.pb-2.mb-0 投稿したお知らせ一覧
