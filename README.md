@@ -1,24 +1,81 @@
-# README
+# FamilyDoctorFinder
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+主に総合病院が、連携する**開業医さん（かかりつけ医）を登録・検索する業務システム**です。</br>
+症状が安定し、総合病院にかかる必要がなくなった患者さんに、通いやすいかかりつけ医を紹介する際に総合病院側が使用します。
 
-Things you may want to cover:
+URL：https://fd-finder.herokuapp.com/
+</br>
+</br>
+## 開発した目的・背景
+- Railsを学習してから期間が空いてしまったので、復習と基本動作を定着させるため
+- 実務により近しいシステムを作成することで、ユーザに使われることを意識した開発を行うため
+- 実際のシステムはサーバーの関係上、機能部分をJSのみで作成したので、サーバサイド言語が使えたら実装したかった機能を盛り込んだ
+</br>
+</br>
+## 概要
+  ### 使用対象者：</br>
+  総合病院の事務員さん、看護師さん、医師や救急救命士の方など
+</br>
+</br>
+  ### 使用例：</br>
+1. 連携するかかりつけ医さんの情報を、登録権限があるユーザが登録
+1. 医師や専門の事務員が、患者さんに通いやすいかかりつけ医さんを紹介する際エリアや診療科目、病院名で検索
+1. 診察日など詳細を確認し、かかりつけ医へ問い合わせる。患者さんには登録したパンフレット（PDF）をサイトから印刷して渡す
+</br>
+</br>
+## 操作権限表
+| 対象者| 病院情報閲覧 | 病院登録・削除 |ユーザ新規登録|
+| :-: | :-: | :-: | :-: |
+| 未ログインユーザ | ◯ | ✖︎ | ✖︎ |
+| ログインユーザ | ◯ | ◯ | ✖︎ |
+| 管理ユーザ | ◯ | ◯ | ◯ |
+</br>
+</br>
 
-* Ruby version
+## 使用技術
+* フロントエンド
+    * jQuery 1.12.4
+    * HTML / SCSS / Bootstrap
+* バックエンド
+    * Ruby 2.6.6
+    * Ruby on Rails 6.0.3
+    * Google MapAPI
+* インフラ
+    * postgres 13.3
+    * Heroku（HerokuーCLI/7.54.0 darwin-x64 node-v12.21.0）</br>※別PFをAWSにデプロイ済みのため、維持費の関係上今回はherokuを使用しました
+    * AWS（S3）※画像アップロード用
+* その他使用ツール
+    * Visual Studio Code
+    * cacoo
+    * draw.io
+    * Google spread sheet
+</br>
+</br>
 
-* System dependencies
+## 機能一覧
+* ユーザー登録関連
+    * ログイン、ログアウト機能
+    * 管理画面（新規登録、ユーザ名編集など）
+* マイページ機能（投稿済みアナウンス、登録病院一覧）
+* PDFアップ/ダウンロード機能 (AWS S3バケット)
+* GoogleMap API
+    * 住所から地図表示
+* マップリンク
+* 病院情報登録、編集機能
+    * 論理削除
+    * 診療時間、診療科目複数登録
+* 検索機能
+    * 病院名の検索
+* お知らせ（アナウンス）投稿機能
+* 診療科・地図別一覧
+<br>
+<br>
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## ER図
+![FDF_ER図2](https://user-images.githubusercontent.com/62799261/128231958-2305c1ce-3d7e-4f7c-a18a-dcabcdf3276d.png)
+<br>
+<br>
+## 工夫したところ
+* DB設計です。診療時間を複数登録するため、試行錯誤の末、曜日を整数型の配列で持たせ実装しました
+* 患者さんに渡すパンフレットをPDFとして登録、保存先をAWSのS3としてダウンロードもできるようにしました
+* 前回制作時、「とにかく分かりやすく！」との要望だったので、全体的に分かりやすく、シンプルさを意識しました。
