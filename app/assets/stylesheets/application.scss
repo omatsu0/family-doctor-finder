@@ -24,6 +24,28 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 .test{
   color: red;
 }
+div
+{
+	display: block;
+	position: relative;
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+body,
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+footer {
+  margin-top: auto!important;
+  color: white;
+}
+.footer-middle {
+  padding-top: 2em;
+  color: white;
+}
 .mw-md {
   max-width: 576px;
 }

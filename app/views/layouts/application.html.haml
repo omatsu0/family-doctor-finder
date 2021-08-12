@@ -1,5 +1,5 @@
 !!!
-%html
+%html.h-100
   %head
     %meta{content: "width=device-width,initial-scale=1", name: "viewport"}/
     %title FamilyDoctorFinder
@@ -9,9 +9,10 @@
     = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
     = stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
   %body
-    = render partial: 'layouts/header'
-    .pb-5
-  %div{class: "container py-10"}
-    = yield
+    #wrapper
+      = render partial: 'layouts/header'
+      .container.pb-5
 
-    = render partial: 'layouts/footer'
+        = yield
+
+      = render partial: 'layouts/footer'

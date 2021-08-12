@@ -56,6 +56,29 @@ tr:hover td {
   text-anchor: middle;
 }
 
+div
+{
+	display: block;
+	position: relative;
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+body,
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+footer {
+  margin-top: auto!important;
+}
+.footer-middle {
+  padding-top: 2em;
+}
+.copy {
+  font-size: 12px;
+}
 @media (min-width: 768px) {
   .bd-placeholder-img-lg {
     font-size: 3.5rem;
