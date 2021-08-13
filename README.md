@@ -51,7 +51,7 @@ URL：https://fd-finder.herokuapp.com/
 </br>
 
 - 診療時間・診療科目複数登録対応
-![名称未設定](https://user-images.githubusercontent.com/62799261/129408489-ca4fe600-6fd5-49af-bff6-cba545c98f11.gif)
+![診療時間追加](https://user-images.githubusercontent.com/62799261/129411295-1365ee1e-52e9-4efb-92e7-65c4a0181cdd.gif)
 
 - 医院詳細ページ
 
