@@ -13,5 +13,6 @@
         = f.label :remember_me, class: 'form-check-label' do
           = resource.class.human_attribute_name('remember_me')
     .form-group.text-center
-      = f.submit  t('.sign_in'), class: 'btn btn-primary'
-  = render 'devise/shared/links'
+      = f.submit  t('.sign_in'), class: 'btn btn-lg btn-primary'
+  .text-center
+    = link_to 'ゲストログイン', users_guest_sign_in_path, method: :post, class: "btn btn-dark submit_button mt-0 text-center"
