@@ -15,7 +15,10 @@ Rails.application.routes.draw do
   resources :departments
   resources :locations
   resources :consultation_hours
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
+  
   resources :users, only: [:show]
 
   devise_scope :user do
